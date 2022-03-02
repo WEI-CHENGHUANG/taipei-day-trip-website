@@ -70,7 +70,7 @@ with open('new-taipei-attractions.json', mode='w', encoding='utf-8') as f:
     
     
     
-# Testing model:
+# Testing model below:
 # print(len(result_list))
 # for i in result_list:
 #     countEachGroup += 1

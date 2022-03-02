@@ -8,11 +8,10 @@ import json
 # Hiding password video: https://www.youtube.com/watch?v=YdgIWTYQ69A
 load_dotenv()
 
-
-def get_connection1():
+def pickOneConnection():
     try:
         connection_pool = pooling.MySQLConnectionPool(
-            pool_name = "testForPooling",
+            pool_name = "myWeHelpPool",
             pool_size = 5,
             pool_reset_session = True,
             host = "localhost",
@@ -30,8 +29,8 @@ def get_connection1():
 # ========================================#
 def selectData(query, whereValue):
     try:
-        connection = get_connection1()
-        cursor = connection.cursor(buffered=True)
+        oneConnection = pickOneConnection()
+        cursor = oneConnection.cursor(buffered=True)
         # This is an example: cursor.execute("SELECT id, name, username FROM member WHERE username=%s", ('test',))
         cursor.execute(query,(whereValue,))
         userNameQuery = cursor.fetchall()
@@ -39,33 +38,11 @@ def selectData(query, whereValue):
     except Error as e:
             print("Connection failed:", e)
     finally:
-        cursor.close()
-        connection.close()
+        if oneConnection.in_transaction:
+            oneConnection.rollback()
+        oneConnection.close()
 
 # # The below two are for testing purpose.
 # query_1 ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images, nextPage FROM taipeiAttractions WHERE nextPage=%s;" 
-# # for i in selectData(query_1, 4):
-# #     print(i)
-
-# page = 4
-# data = []
-# for i in selectData(query_1, page):
-#     jsonToList = json.loads(i[9])
-#     # print(jsontolist)
-#     # print(type(jsontolist))
-    
-  
-#     eachRow = {
-#                 "images": jsontolist}
-#     data.append(eachRow)
-#     print(eachRow)
-#     print()
-# print(data)
-# test11 = json.loads(data)
-# test22 = {"nextPage": page, "data": data}
-# print(test22)
-# print(data)
-
-
-# rr = ["https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000788.jpg", "https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000789.jpg", "https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000790.jpg"]
-# print(type(rr))
+# for i in selectData(query_1, 4):
+#     print(i)
