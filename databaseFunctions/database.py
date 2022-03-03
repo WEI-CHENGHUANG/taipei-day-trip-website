@@ -3,7 +3,7 @@
 from mysql.connector import pooling, Error
 from dotenv import load_dotenv
 import os
-import json
+
 
 # Hiding password video: https://www.youtube.com/watch?v=YdgIWTYQ69A
 load_dotenv()
@@ -23,7 +23,7 @@ def pickOneConnection():
         connection = connection_pool.get_connection()
         return connection
     except Error as e:
-        print("Connection failed:", e)
+        return {"error": True, "message": e}, 500
         
         
 # ========================================#
@@ -36,13 +36,16 @@ def selectData(query, whereValue):
         userNameQuery = cursor.fetchall()
         return(userNameQuery)
     except Error as e:
-            print("Connection failed:", e)
+        return {"error": True, "message": e}
+
     finally:
         if oneConnection.in_transaction:
             oneConnection.rollback()
         oneConnection.close()
 
 # # The below two are for testing purpose.
-# query_1 ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images, nextPage FROM taipeiAttractions WHERE nextPage=%s;" 
-# for i in selectData(query_1, 4):
+# query_1 ="SELECT i FROM taipeiAttractions WHERE id = %s;" 
+# for i in selectData(query_1, 1):
 #     print(i)
+
+

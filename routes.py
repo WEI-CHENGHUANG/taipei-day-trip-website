@@ -5,5 +5,6 @@ from apiForAttractions import attractions, attractionId
 def initialize_routes(api):
     api.add_resource(attractions, '/api/attractions')
     api.add_resource(attractionId, '/api/attraction/<attractionId>')
+    
 
 
