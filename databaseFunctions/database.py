@@ -1,9 +1,10 @@
 # pip install python-dotenv
 # pip install mysql-connector-python
+from flask import jsonify
 from mysql.connector import pooling, Error
 from dotenv import load_dotenv
-import os
-import json
+import os, json
+
 
 # Hiding password video: https://www.youtube.com/watch?v=YdgIWTYQ69A
 load_dotenv()
@@ -23,26 +24,46 @@ def pickOneConnection():
         connection = connection_pool.get_connection()
         return connection
     except Error as e:
-        print("Connection failed:", e)
+        return {"error": True, "message": e}, 500
         
         
 # ========================================#
-def selectData(query, whereValue):
+
+def queryOneCaluse(query, offset):
     try:
         oneConnection = pickOneConnection()
         cursor = oneConnection.cursor(buffered=True)
-        # This is an example: cursor.execute("SELECT id, name, username FROM member WHERE username=%s", ('test',))
-        cursor.execute(query,(whereValue,))
+        cursor.execute(query, (offset,))
         userNameQuery = cursor.fetchall()
-        return(userNameQuery)
+        return userNameQuery
+    
     except Error as e:
-            print("Connection failed:", e)
+        return {"error": True, "message": e}, 500
+
     finally:
         if oneConnection.in_transaction:
             oneConnection.rollback()
         oneConnection.close()
 
-# # The below two are for testing purpose.
-# query_1 ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images, nextPage FROM taipeiAttractions WHERE nextPage=%s;" 
-# for i in selectData(query_1, 4):
-#     print(i)
+
+def queryKeyword(query, keyword, page):
+    try:
+        oneConnection = pickOneConnection()
+        cursor = oneConnection.cursor(buffered=True)
+        cursor.execute(query, (keyword, page))
+        userNameQuery = cursor.fetchall()
+        return userNameQuery
+    
+    except Error as e:
+        return {"error": True, "message": e}, 500
+    
+    finally:
+        if oneConnection.in_transaction:
+            oneConnection.rollback()
+        oneConnection.close()
+        
+        
+
+    
+
+
