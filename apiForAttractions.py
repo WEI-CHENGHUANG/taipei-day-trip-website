@@ -104,7 +104,7 @@ class attractionId(Resource):
         queryIdResult = queryOneCaluse(queryId, attractionId)
         try:
             if queryIdResult:
-                response = jsonify({"data": queryPageResultFunction(queryIdResult)})
+                response = jsonify({"data": queryPageResultFunction(queryIdResult)[0]})
                 response.headers["Content-Type"] = "application/json"
                 return response
                 
