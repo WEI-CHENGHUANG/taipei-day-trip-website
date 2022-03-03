@@ -11,6 +11,8 @@ app=Flask(__name__)
 # cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+# how to keep order of sorted dictionary passed to jsonify() function? : https://stackoverflow.com/questions/54446080/how-to-keep-order-of-sorted-dictionary-passed-to-jsonify-function
+app.config['JSON_SORT_KEYS'] = False
 
 # This is for RESTful api to use.
 api = Api(app)

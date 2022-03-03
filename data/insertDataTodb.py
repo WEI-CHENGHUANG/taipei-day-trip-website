@@ -26,10 +26,9 @@ for i in data:
         # Reference=> how to insert JSON in mysql: https://sebhastian.com/mysql-array/#:~:text=You%20can't%20create%20a,storing%20JSON%20arrays%20and%20objects.
         # Reference=> how to how convert list to JSON: https://appdividend.com/2022/01/28/how-to-convert-python-list-to-json/#:~:text=To%20convert%20the%20list%20to,returns%20the%20json%20data%20type.
         covertImage = json.dumps(x["images"])
-        pageIndex = data.index(i)
-        eachRow = (x["id"], x["name"], x["category"], x["description"], x["address"], x["transport"], x["mrt"], x["latitude"], x["longitude"], covertImage, pageIndex, i["nextPage"])
+        eachRow = (x["id"], x["name"], x["category"], x["description"], x["address"], x["transport"], x["mrt"], x["latitude"], x["longitude"], covertImage)
      
-        insertValue = "INSERT INTO taipeiAttractions (id, name, category, description, address, transport, mrt, latitude, longitude, images, page, nextPage) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        insertValue = "INSERT INTO taipeiAttractions (id, name, category, description, address, transport, mrt, latitude, longitude, images) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         mycursor.execute(insertValue, eachRow)
 
 db.commit()
