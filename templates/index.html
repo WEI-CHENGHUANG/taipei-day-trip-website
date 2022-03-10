@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/styleForIndex.css" />
+    <!-- <link rel="stylesheet" href="/static/styleForIndex.css" /> -->
     <!-- 正式使用 -->
-    <!-- <link href="{{url_for('static', filename='styleForIndex.css')}}" rel="stylesheet" type="text/css"> -->
+    <link
+      href="{{url_for('static', filename='styleForIndex.css')}}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- The line below is for font-family:'Noto Sans TC';  Reference:https://www.w3schools.com/howto/tryit.asp?font=Noto%20Sans%20TC-->
     <link
       href="https://fonts.googleapis.com/css?family=Noto Sans TC"
       rel="stylesheet"
     />
-    <!-- <<script src="{{url_for('static', filename='fetchDataFromApi.js')}}"></script> -->
 
     <title>Document</title>
   </head>
@@ -67,6 +70,7 @@
         <div></div>
       </div>
     </footer>
-    <script src="/static/fetchDataFromApi.js"></script>
+    <!-- <script src="/static/fetchDataFromApi.js"></script> -->
+    <script src="{{url_for('static', filename='fetchDataFromApi.js')}}"></script>
   </body>
 </html>
