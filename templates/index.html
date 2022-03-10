@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styleForIndex.css">
+    <!-- 正式使用 -->
+    <!-- <link href="{{url_for('static', filename='styleForIndex.css')}}" rel="stylesheet" type="text/css"> -->
+    <!-- The line below is for font-family:'Noto Sans TC';  Reference:https://www.w3schools.com/howto/tryit.asp?font=Noto%20Sans%20TC-->
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans TC' rel='stylesheet'>
+    <!-- <<script src="{{url_for('static', filename='fetchDataFromApi.js')}}"></script> -->
+
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navCheckbox">
+        <div class="contentNav">
+            <div class="logoBox">
+                <a href="put the homepage line here">台北一日遊</a>
+            </div>
+            <div class="registionBox">
+                <div class="push">
+                    <button class="pushItems_1">預定行程</button>
+                    <button class="pushItems_2">登入/註冊</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+   
+    <div class="welcomeZone">
+        <div class="welcomeZoneContent">
+            <div class="welcomeZoneItems">
+                <h2>輕鬆享受台北一日悠閒</h2>
+                <p>探索每個角落，體驗城市的深度旅遊行程</p>
+                <div class="queryBox">
+                    <input id="queryLocationName" class="queryLocationName" placeholder="輸入景點名稱查詢">
+                    <button  onclick="urlCheck()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="outerContainer" class="outerContainer">
+        <div id="container" class="container">
+            <!-- <div id='square' class ="square">
+                <div class="topBox">
+                    <div class="image"></div>
+                    <p>平安鐘</p>
+                </div>
+                <div class="bottomBox">
+                    <p class="p_1">忠孝復興</p>
+                    <p class="p_2">公共藝術</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <footer>
+        <div class="footerBox">
+            <div></div>
+        </div>
+    </footer>
+    <script src="/static/fetchDataFromApi.js"></script>
+</body>
+</html>

@@ -46,11 +46,11 @@ def queryOneCaluse(query, offset):
         oneConnection.close()
 
 
-def queryKeyword(query, keyword, page):
+def queryKeyword(query, *args):
     try:
         oneConnection = pickOneConnection()
         cursor = oneConnection.cursor(buffered=True)
-        cursor.execute(query, (keyword, page))
+        cursor.execute(query, *args)
         userNameQuery = cursor.fetchall()
         return userNameQuery
     
