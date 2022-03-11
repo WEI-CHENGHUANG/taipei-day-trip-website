@@ -25,13 +25,11 @@ def queryPageResultFunction(queryPageResult):
         return data
     except:
         response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry"}),500)
-        response.headers["Content-Type"] = "application/json"
         return response
         
 
 def responseQueryResult(nextPage, data):
     response = jsonify({"nextPage": nextPage, "data": queryPageResultFunction(data)})
-    response.headers["Content-Type"] = "application/json"
     return response
 
 
@@ -46,21 +44,21 @@ class attractions(Resource):
         # This If is to check the only keyword input situation
         if page is None:
             page = 0
-        # This try is to avoid the uses to provide a character as a page number.
+        # This try is to avoid the user to provide a character as a page number.
         try:
             offsetPage = int(page)*12
         except:
             response = make_response(jsonify({"error": True, "message": "Wrong number input"}),500)
-            response.headers["Content-Type"] = "application/json"
+
             return response
-        
+        # LIMIT means every query only returns 13 rows result and OFFSET means the system will skip how many rows first. 
         queryPage ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM taipeiAttractions LIMIT 13 OFFSET %s;"
         queryPageResult = queryOneCaluse(queryPage, offsetPage)[0:12]
         # Keyword
         keywordQuery = request.args.get('keyword')
         queryKeyWord ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM taipeiAttractions WHERE name like %s LIMIT 13 OFFSET %s;"
         NewkeywordQuery = f'%{keywordQuery}%'
-        queryKeyWordResult = queryKeyword(queryKeyWord, NewkeywordQuery, offsetPage)[0:12]
+        queryKeyWordResult = queryKeyword(queryKeyWord, (NewkeywordQuery, offsetPage))[0:12]
         try: 
             # Only Page
             # This IF is to detect how kind of input we get from user.
@@ -75,23 +73,23 @@ class attractions(Resource):
                 
                 else:
                     response = make_response(jsonify({"error": True, "message": "Out of range"}),500)
-                    response.headers["Content-Type"] = "application/json"
+        
                     return response
             # Page and Keyword
             elif (page != None) and (keywordQuery != None):
                 if queryPageResult and queryKeyWordResult:
-                    if len(queryKeyword(queryKeyWord, NewkeywordQuery, offsetPage))<13:
+                    if len(queryKeyword(queryKeyWord, (NewkeywordQuery, offsetPage)))<13:
                         return responseQueryResult(None, queryKeyWordResult)
                     else:
                         return responseQueryResult(int(page)+1, queryKeyWordResult)
                     
                 else:
-                    response = make_response(jsonify({"error": True, "message": "Page or keyword may be wrong"}),500)
-                    response.headers["Content-Type"] = "application/json"
+                    response = make_response(jsonify({"error": True, "message": "Page or keyword may be wrong"}),200)
+        
                     return response
         except:       
             response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry"}),500)
-            response.headers["Content-Type"] = "application/json"
+
             return response
     
     
@@ -105,16 +103,16 @@ class attractionId(Resource):
         try:
             if queryIdResult:
                 response = jsonify({"data": queryPageResultFunction(queryIdResult)[0]})
-                response.headers["Content-Type"] = "application/json"
+    
                 return response
                 
             else:
                 response = make_response(jsonify({"error": True, "message": f"Sorry, could not find ID:{attractionId}"}),400)
-                response.headers["Content-Type"] = "application/json"
+    
                 return response
         except:
             response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry"}),500)
-            response.headers["Content-Type"] = "application/json"
+
             return response
 
 
