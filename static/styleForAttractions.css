@@ -97,8 +97,8 @@ body {
 }
 /* Picture animation ==============*/
 .attractionPic {
-  /* border: 2px solid blanchedalmond; */
-  /* border-color: blue; */
+  /* border: 2px solid blanchedalmond;
+  border-color: blue; */
   width: 540px;
   height: 406px;
   box-sizing: border-box;
@@ -407,4 +407,98 @@ body {
   width: 234px;
   height: 14px;
   margin-top: 45px;
+}
+
+@media (max-width: 1200px) {
+  .contentNav {
+    width: 90%;
+  }
+  .wholeTopInfoBackground {
+    width: 100%;
+  }
+  .topinfo {
+    width: 100%;
+  }
+  .attractionPic {
+    width: auto;
+    margin-left: 30px;
+  }
+
+  .attractionInfo > .bookingDetails {
+    width: 100%;
+  }
+  .attractionInfo {
+    margin-right: 30px;
+  }
+  .bookingDetails > .bookingDetailsDescription {
+    word-wrap: break-word;
+    line-height: normal;
+  }
+
+  .bookingDetails > .timeOptions > .timeOptionsContainer {
+    line-height: normal;
+  }
+  .bottomInfo > .firstP > p {
+    margin: 0 30px;
+  }
+
+  .bottomInfo > .attractionAddress > h2 {
+    margin-top: 20px;
+    margin: 0 30px;
+  }
+  .bottomInfo > .attractionAddress > p {
+    margin-top: 0;
+    margin: 0 30px;
+  }
+  .bottomInfo > .attractionTransportation > h2 {
+    margin-top: 20px;
+    margin: 0 30px;
+  }
+  .bottomInfo > .attractionTransportation > p {
+    margin-top: 0;
+    margin: 0 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contentNav {
+    width: 100%;
+  }
+  .pushItems_1 {
+    font-size: 13.5px;
+    justify-content: none;
+  }
+
+  .pushItems_2 {
+    font-size: 13.5px;
+  }
+  .wholeTopInfoBackground {
+    width: 100%;
+    height: 950px;
+  }
+  .topinfo {
+    flex-direction: column;
+  }
+  .attractionPic {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+  .attractionInfo {
+    width: auto;
+    margin: 10px;
+  }
+  .attractionInfo > h2 {
+    width: 100%;
+    margin: 0;
+  }
+  .attractionInfo > p {
+    width: 100%;
+    margin: 0;
+    margin-top: 15px;
+  }
+  .attractionInfo > .bookingDetails {
+    width: 96%;
+    margin: 0;
+    margin-top: 20px;
+  }
 }
