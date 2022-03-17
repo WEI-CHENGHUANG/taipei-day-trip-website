@@ -484,7 +484,7 @@ body {
     margin-bottom: 20px;
   }
   .attractionPic > .slideImage > img {
-    border-radius: none;
+    border-radius: 0;
   }
   .attractionInfo {
     width: auto;
