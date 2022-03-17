@@ -483,6 +483,9 @@ body {
     margin-left: 0;
     margin-bottom: 20px;
   }
+  .attractionPic > .slideImage > img {
+    border-radius: none;
+  }
   .attractionInfo {
     width: auto;
     margin: 10px;
@@ -505,6 +508,6 @@ body {
     margin-right: 10px;
   }
   .bookingDetails > .bookingConfirmed > button {
-    width: 156px;
+    width: 160px;
   }
 }
