@@ -501,4 +501,10 @@ body {
     margin: 0;
     margin-top: 20px;
   }
+  .bookingDetails > .bookingDetailsDescription {
+    margin-right: 10px;
+  }
+  .bookingDetails > .bookingConfirmed > button {
+    width: 156px;
+  }
 }
