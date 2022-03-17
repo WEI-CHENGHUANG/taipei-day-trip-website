@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/styleForIndex.css" />
+    <!-- <link rel="stylesheet" href="/static/styleForIndex.css" /> -->
     <!-- 正式使用 -->
     <link
       href="{{url_for('static', filename='styleForIndex.css')}}"
@@ -23,7 +23,7 @@
     <nav class="navCheckbox">
       <div class="contentNav">
         <div class="logoBox">
-          <a href="put the homepage line here">台北一日遊</a>
+          <a href="http://52.63.14.114:3000/">台北一日遊</a>
         </div>
         <div class="registionBox">
           <div class="push">
@@ -45,7 +45,7 @@
               class="queryLocationName"
               placeholder="輸入景點名稱查詢"
             />
-            <button onclick="urlCheck()"></button>
+            <button onclick="querytagsCheck()"></button>
           </div>
         </div>
       </div>
@@ -53,16 +53,18 @@
 
     <div id="outerContainer" class="outerContainer">
       <div id="container" class="container">
-        <!-- <div id='square' class ="square">
-                <div class="topBox">
-                    <div class="image"></div>
-                    <p>平安鐘</p>
-                </div>
-                <div class="bottomBox">
-                    <p class="p_1">忠孝復興</p>
-                    <p class="p_2">公共藝術</p>
-                </div>
-            </div> -->
+        <!-- <a href="http://192.168.0.223:3000/attraction/10">
+          <div id="square" class="square">
+            <div class="topBox">
+              <div class="image"></div>
+              <p>平安鐘</p>
+            </div>
+            <div class="bottomBox">
+              <p class="p_1">忠孝復興</p>
+              <p class="p_2">公共藝術</p>
+            </div>
+          </div>
+        </a> -->
       </div>
     </div>
     <footer>
@@ -70,7 +72,7 @@
         <div></div>
       </div>
     </footer>
-    <script src="/static/fetchDataFromApi.js"></script>
+    <!-- <script src="/static/fetchDataFromApi.js"></script> -->
     <script src="{{url_for('static', filename='fetchDataFromApi.js')}}"></script>
   </body>
 </html>

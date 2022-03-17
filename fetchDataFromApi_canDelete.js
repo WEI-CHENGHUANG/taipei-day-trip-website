@@ -74,13 +74,7 @@ function queryAttractions(pageNumber) {
           let mrt = response["data"][i]["mrt"];
           let category = response["data"][i]["category"];
           let image = response["data"][i]["images"][0];
-          let id = response["data"][i]["id"];
-          // This url is not the same as the /api/attraction/id,
-          // this url directly link to the attraction.html page, but using the data capatured from API.
-          // let idUrl = `http://52.63.14.114:3000/attraction/${id}`;
-          let idUrl = `http://52.63.14.114:3000/attraction/${id}`;
-          createGrid(name, mrt, category, image, idUrl);
-          // console.log(idUrl);
+          createGrid(name, mrt, category, image);
         }
       }
       // This function is for testing purpose and also can know whether the data back or not.
@@ -103,20 +97,15 @@ window.addEventListener("scroll", () => {
 
   if (Math.ceil(scrlled) === scrollable) {
     if (count && isLoading === false) queryAttractions(count);
+  } else {
+    console.log("I am here");
   }
-  // else {
-  //   console.log("I am here");
-  // }
 });
 
 // 這底下不用看  因為這是為了create block用的
 // change the title to => name, mrt, category. url => image
-function createGrid(name, mrt, category, image, idUrl) {
+function createGrid(name, mrt, category, image) {
   let container = document.getElementsByClassName("container")[0];
-
-  // a tag
-  let lineToAttractionPage = document.createElement("a");
-  lineToAttractionPage.setAttribute("href", idUrl);
 
   // Reference(如何添加 New Node): https://ithelp.ithome.com.tw/articles/10191867    => check in the middle of the article
   // 增加節點
@@ -154,6 +143,5 @@ function createGrid(name, mrt, category, image, idUrl) {
   secondLayerDivbottomBox.appendChild(thirdLayerPForCategory);
   firstLayerDiv.appendChild(secondLayerDivTopBox);
   firstLayerDiv.appendChild(secondLayerDivbottomBox);
-  lineToAttractionPage.appendChild(firstLayerDiv);
-  container.appendChild(lineToAttractionPage);
+  container.appendChild(firstLayerDiv);
 }
