@@ -1,62 +1,57 @@
-let count = 0;
+let nextPage = 0;
 let isLoading = false;
 
-function setCount(userInput) {
-  count = userInput;
-  console.log(count);
+function setNextPage(val) {
+  nextPage = val;
 }
 
 // This function can be called flag. I use this funciton to detect if the queryAttractions function is fetching data or not.
 // Check the comment inside of the queryAttractions function
-function detectLoading(signal) {
+function setLoading(signal) {
   isLoading = signal;
-  console.log(isLoading);
 }
 
-function removetags(userInput) {
+function showErrorMsg(userInput) {
+  let p = document.createElement("p");
+  p.className = "wrongMessage";
+  p.innerHTML = userInput;
+  
   let container = document.getElementById("container");
-
-  let firstLayerDiv = document.createElement("p");
-  firstLayerDiv.className = "wrongMessage";
-  container.appendChild(firstLayerDiv);
-  firstLayerDiv.innerHTML = userInput;
-
-  container.parentNode.replaceChild(firstLayerDiv, container);
+  container.appendChild(p);
+  container.parentNode.replaceChild(p, container);
 }
 
-function urlCheck() {
-  keywordInput = document.getElementById("queryLocationName").value;
+function onSearch() {
   let container = document.getElementById("container");
   if (container) {
     container.remove();
   }
-  let wrongMessage = document.querySelector(".wrongMessage");
 
+  let wrongMessage = document.querySelector(".wrongMessage");
   if (wrongMessage) {
     wrongMessage.remove();
   }
+  
+  let div = document.createElement("div");
+  div.className = "container";
+  div.id = "container";
 
   let outerContainer = document.getElementById("outerContainer");
+  outerContainer.appendChild(div);
 
-  let firstLayerDiv = document.createElement("div");
-  firstLayerDiv.className = "container";
-  firstLayerDiv.id = "container";
-  outerContainer.appendChild(firstLayerDiv);
-
-  queryAttractionsByKeyword(0);
+  queryByPagination(0);
 }
 
-function queryAttractionsByKeyword(pageNumber) {
+function queryByPagination(pageNumber) {
   // If isLoading is true, it means function is fetching the data via API. Even the scrolling function has been manipulated more than once.
   // This queryAttractions function cannot pass the if statement in scrolling function. (check window.addEventListener)
-  detectLoading(true);
+  setLoading(true);
 
-  let url = "";
-  keywordInput = document.getElementById("queryLocationName").value;
-  if (keywordInput === "") {
-    url = `http://52.63.14.114:3000/api/attractions?page=${pageNumber}`;
-  } else {
-    url = `http://52.63.14.114:3000/api/attractions?page=${pageNumber}&keyword=${keywordInput}`;
+  let url = `http://52.63.14.114:3000/api/attractions?page=${pageNumber}`;
+  
+  const keywordInput = document.getElementById("queryLocationName").value;
+  if (keywordInput.trim() !== "") {
+    url += `&keyword=${keywordInput}`;
   }
 
   fetch(url)
@@ -64,10 +59,11 @@ function queryAttractionsByKeyword(pageNumber) {
       return response.json();
     })
     .then((response) => {
-      setCount(response["nextPage"]);
+      setNextPage(response["nextPage"]);
+
       if (response.message) {
-        removetags(
-          `${response.message} or  there are no results matching your query.`
+        showErrorMsg(
+          `${response.message} or there are no results matching your query.`
         );
       } else {
         for (let i = 0; i < response["data"].length; i++) {
@@ -80,28 +76,30 @@ function queryAttractionsByKeyword(pageNumber) {
       }
       // This function is for testing purpose and also can know whether the data back or not.
       // setTimeout(function(){
-      //     detectLoading(false);
+      //     setLoading(false);
       // },5000)
 
       // If the data has been captured successfully by API, this means here should set up to false. Then, the system can excute the function again.
-      detectLoading(false);
+      setLoading(false);
     })
     .catch((error) => {
-      console.log(error, "tetstsetsete");
+      console.log(error, "query failed");
     });
 }
 
-queryAttractionsByKeyword(count);
 window.addEventListener("scroll", () => {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
   const scrlled = window.scrollY;
 
-  if (Math.ceil(scrlled) === scrollable) {
-    if (count && isLoading === false) queryAttractionsByKeyword(count);
-  } else {
-    console.log("I am here");
+  if (Math.ceil(scrlled) === scrollable && nextPage && !isLoading) {
+    queryByPagination(nextPage);
   }
 });
+
+// execute query after the DOM is ready
+window.onload = function() {
+  queryByPagination(nextPage);
+}
 
 // 這底下不用看  因為這是為了create block用的
 // change the title to => name, mrt, category. url => image
