@@ -12,7 +12,7 @@ body {
     border-color:black; */
   width: 100%;
   height: 320px;
-  background-image: url(welcome.png),
+  background-image: url(/static/pictures/welcome.png),
     linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
   background-repeat: no-repeat, no-repeat;
   background-size: contain, cover;
@@ -80,7 +80,7 @@ body {
 .queryBox > button {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-image: url(icon_search.png);
+  background-image: url(/static/pictures/icon_search.png);
   background-color: #448899;
   background-repeat: no-repeat;
   background-position: center;
