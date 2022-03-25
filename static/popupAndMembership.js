@@ -149,8 +149,8 @@ signInToSystem.addEventListener("click", (outcome) => {
 });
 
 function logInToSystem() {
-  url = "http://192.168.0.223:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
+  // url = "http://192.168.0.223:3000/api/user";
+  url = "http://52.63.14.114:3000/api/user";
   singInInput = document.getElementById("sigInEmailBox").value;
   sigInPasswordBox = document.getElementById("sigInPasswordBox").value;
 
@@ -217,8 +217,8 @@ registerNewMeber.addEventListener("click", (outcome) => {
 });
 // =============================
 function registerToSystem() {
-  url = "http://192.168.0.223:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
+  // url = "http://192.168.0.223:3000/api/user";
+  url = "http://52.63.14.114:3000/api/user";
 
   fetch(url, {
     method: "POST",
@@ -251,8 +251,8 @@ function registerToSystem() {
 }
 
 function checkUserStatus() {
-  url = "http://192.168.0.223:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
+  // url = "http://192.168.0.223:3000/api/user";
+  url = "http://52.63.14.114:3000/api/user";
   fetch(url)
     .then((response) => {
       return response.json();
@@ -271,8 +271,8 @@ function checkUserStatus() {
 }
 
 function deleteUserStatus(singInInput, sigInPasswordBox) {
-  url = "http://192.168.0.223:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
+  // url = "http://192.168.0.223:3000/api/user";
+  url = "http://52.63.14.114:3000/api/user";
   fetch(url, {
     method: "DELETE",
   })
