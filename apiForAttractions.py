@@ -1,7 +1,7 @@
 # This article is really important cuz it diplays how the RESTful api interact with Flask_Blueprint.
 # https://dev.to/paurakhsharma/flask-rest-api-part-2-better-structure-with-blueprint-and-flask-restful-2n93#:~:text=Blueprint%3A%20It%20is%20used%20to,quickly%20and%20following%20best%20practices.
 
-from databaseFunctions.database import queryOneCaluse, queryKeyword
+from databaseFunctions.database import queryOneClause, queryKeyword
 from flask_restful import Resource
 from flask  import *
 import json
@@ -53,7 +53,7 @@ class attractions(Resource):
             return response
         # LIMIT means every query only returns 13 rows result and OFFSET means the system will skip how many rows first. 
         queryPage ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM taipeiAttractions LIMIT 13 OFFSET %s;"
-        queryPageResult = queryOneCaluse(queryPage, offsetPage)[0:12]
+        queryPageResult = queryOneClause(queryPage, offsetPage)[0:12]
         # Keyword
         keywordQuery = request.args.get('keyword')
         queryKeyWord ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM taipeiAttractions WHERE name like %s LIMIT 13 OFFSET %s;"
@@ -66,7 +66,7 @@ class attractions(Resource):
                 # This IF is to make sure that the query result is not empty.
                 if queryPageResult:
                     # This IF is to check the result whether last page or not.
-                    if len(queryOneCaluse(queryPage, offsetPage))<13:
+                    if len(queryOneClause(queryPage, offsetPage))<13:
                         return responseQueryResult(None, queryPageResult)
                     else:
                         return responseQueryResult(int(page)+1, queryPageResult)
@@ -99,7 +99,7 @@ class attractionId(Resource):
     def get(self, attractionId):
         
         queryId ="SELECT id, name, category, description, address, transport, mrt, latitude, longitude, images FROM taipeiAttractions WHERE id=%s;" 
-        queryIdResult = queryOneCaluse(queryId, attractionId)
+        queryIdResult = queryOneClause(queryId, attractionId)
         try:
             if queryIdResult:
                 response = jsonify({"data": queryPageResultFunction(queryIdResult)[0]})

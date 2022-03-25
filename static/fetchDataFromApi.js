@@ -92,7 +92,10 @@ function queryAttractions(pageNumber) {
       detectLoading(false);
     })
     .catch((error) => {
-      console.log(error, "tetstsetsete");
+      console.log(
+        error,
+        "Something went wrong when fetching data via API, Check JS function : queryAttractions()"
+      );
     });
 }
 

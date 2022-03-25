@@ -4,6 +4,7 @@ from flask import *
 from flask_restful import Api
 from routes import initialize_routes
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 
 app=Flask(__name__)
 # cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -11,12 +12,16 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 # how to keep order of sorted dictionary passed to jsonify() function? : https://stackoverflow.com/questions/54446080/how-to-keep-order-of-sorted-dictionary-passed-to-jsonify-function
 app.config['JSON_SORT_KEYS'] = False
+# https://flask-jwt-extended.readthedocs.io/en/3.0.0_release/tokens_in_cookies/
+app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+app.config['JWT_SECRET_KEY'] = 'taiwan'
 
 
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 # This is for RESTful api to use.
 api = Api(app)
 initialize_routes(api)
+jwt = JWTManager(app)
 
 # Pages
 @app.route("/")
@@ -32,6 +37,8 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+
+
 
 
 

@@ -3,79 +3,7 @@ body {
   padding: 0;
   font-family: "Noto Sans TC";
 }
-
-/* Nav bar */
-.navCheckbox {
-  /* border: 2px solid;
-    border-color: black; */
-  display: flex;
-  height: 54px;
-  background-color: yellowgreen;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.contentNav {
-  /* background-color:red; */
-  display: flex;
-  justify-content: space-between;
-  width: 1200px;
-  height: 54px;
-}
-
-.logoBox {
-  /* background-color:lightblue; */
-  display: flex;
-  align-items: center;
-}
-
-.push {
-  /* background-color:black; */
-  display: flex;
-  list-style: none;
-  margin: 0;
-}
-.logoBox > a {
-  font-size: 30px;
-  font-weight: bold;
-  color: #448899;
-  font-family: sans-serif;
-  text-decoration: none;
-  width: 175px;
-}
-
-.pushItems_1 {
-  border: none;
-  color: #666666;
-  font-weight: bold;
-  line-height: 13px;
-  font-size: 16px;
-  text-decoration: none;
-  width: 84px;
-  height: 54px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-}
-.pushItems_2 {
-  border: none;
-  color: #666666;
-  font-weight: bold;
-  line-height: 13px;
-  font-size: 16px;
-  text-decoration: none;
-  width: 91px;
-  height: 54px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-}
+/* Login backgroud cover ==========================*/
 
 /* Welcome Zone ==========================*/
 
@@ -249,29 +177,7 @@ body {
   text-align: center;
 }
 
-/* Footer=========================*/
-
-.footerBox {
-  background: #757575;
-  height: 104px;
-  display: flex;
-  justify-content: center;
-}
-
-.footerBox > div {
-  background-image: url(footer_2021.png);
-  background-repeat: no-repeat;
-  width: 234px;
-  height: 14px;
-  margin-top: 45px;
-}
-
 @media (max-width: 1200px) {
-  /* Nav bar */
-
-  .contentNav {
-    width: 90%;
-  }
   /* Welcome Zone ==========================*/
   .welcomeZone {
     /* border: 0.5px solid;
@@ -286,25 +192,11 @@ body {
 }
 
 @media (max-width: 600px) {
-  .contentNav {
-    width: 100%;
-  }
-  .pushItems_1 {
-    font-size: 13.5px;
-    justify-content: none;
-  }
-
-  .pushItems_2 {
-    font-size: 13.5px;
-  }
-
-  .welcomeZone {
-    height: 280px;
-  }
   /* Welcome Zone ==========================*/
   .welcomeZone {
     /* border: 0.5px solid;
         border-color:#F8F8F8; */
+    height: 280px;
     background-size: 90%, cover;
     background-position: bottom right -25vw, top;
   }

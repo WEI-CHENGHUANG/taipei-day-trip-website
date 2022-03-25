@@ -29,11 +29,11 @@ def pickOneConnection():
         
 # ========================================#
 
-def queryOneCaluse(query, offset):
+def queryOneClause(query, condition):
     try:
         oneConnection = pickOneConnection()
         cursor = oneConnection.cursor(buffered=True)
-        cursor.execute(query, (offset,))
+        cursor.execute(query, (condition,))
         userNameQuery = cursor.fetchall()
         return userNameQuery
     
@@ -44,6 +44,24 @@ def queryOneCaluse(query, offset):
         if oneConnection.in_transaction:
             oneConnection.rollback()
         oneConnection.close()
+
+
+def queryMultileClauses(query, *args):
+    try:
+        oneConnection = pickOneConnection()
+        cursor = oneConnection.cursor(buffered=True)
+        cursor.execute(query, *args)
+        userNameQuery = cursor.fetchall()
+        return userNameQuery
+    
+    except Error as e:
+        return {"error": True, "message": e}, 500
+
+    finally:
+        if oneConnection.in_transaction:
+            oneConnection.rollback()
+        oneConnection.close()
+
 
 
 def queryKeyword(query, *args):
@@ -63,7 +81,17 @@ def queryKeyword(query, *args):
         oneConnection.close()
         
         
-
+def insertNewMembers(insert, *args):
+    try:
+        oneConnection = pickOneConnection()
+        cursor = oneConnection.cursor(buffered=True)
+        cursor.execute(insert, *args)
+        oneConnection.commit()
+        
+    except Error as e:
+        return {"error": True, "message": e}, 500
     
-
-
+    finally:
+        if oneConnection.in_transaction:
+            oneConnection.rollback()
+        oneConnection.close()

@@ -22,19 +22,9 @@
     />
   </head>
   <body>
-    <nav class="navCheckbox">
-      <div class="contentNav">
-        <div class="logoBox">
-          <a href="http://52.63.14.114:3000/">台北一日遊</a>
-        </div>
-        <div class="registionBox">
-          <div class="push">
-            <button class="pushItems_1">預定行程</button>
-            <button class="pushItems_2">登入/註冊</button>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <div id="signInPopup" class="popup">{% include 'signIn.html' %}</div>
+    <div id="registerPopup" class="popup">{% include 'register.html' %}</div>
+    <nav class="navCheckbox">{% include 'header.html' %}</nav>
     <main>
       <div class="wholeTopInfoBackground">
         <div class="topinfo">
@@ -118,10 +108,9 @@
     </main>
 
     <footer>
-      <div class="footerBox">
-        <div></div>
-      </div>
+      <div class="footerBox">{% include 'footer.html' %}</div>
     </footer>
+    <script src="{{url_for('static', filename='popupAndMembership.js')}}"></script>
     <!-- <script src="/static/attractions.js"></script> -->
     <script src="{{url_for('static', filename='attractions.js')}}"></script>
   </body>
