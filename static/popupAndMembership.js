@@ -157,8 +157,6 @@ signInToSystem.addEventListener("click", (outcome) => {
 });
 
 function logInToSystem(urlUser) {
-  // url = "http://127.0.0.1:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
   singInInput = document.getElementById("sigInEmailBox").value;
   sigInPasswordBox = document.getElementById("sigInPasswordBox").value;
   fetch(urlUser, {
@@ -225,9 +223,6 @@ registerNewMeber.addEventListener("click", (outcome) => {
 // =============================
 
 function registerToSystem(urlUser) {
-  // url = " http://127.0.0.1:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
-
   fetch(urlUser, {
     method: "POST",
     headers: {
@@ -259,8 +254,7 @@ function registerToSystem(urlUser) {
 }
 
 function checkUserStatus(urlUser, urlCurrentBooking) {
-  // url = " http://127.0.0.1:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
+
   fetch(urlUser)
     .then((response) => {
       return response.json();
@@ -273,8 +267,6 @@ function checkUserStatus(urlUser, urlCurrentBooking) {
         // I need to check which page are sending this API then response the user name to page.
         // The code below is all showing in the booking page.
         currentPageUrl = window.location.href;
-        // url = "http://127.0.0.1:3000/booking"
-        // url = "http://52.63.14.114:3000/booking"
         if (currentPageUrl === urlCurrentBooking) {
           userName = data["data"]["name"]
           firstSubTitleBookingPage = document.getElementsByClassName("firstSubTitle")[0]
@@ -295,8 +287,6 @@ function checkUserStatus(urlUser, urlCurrentBooking) {
 }
 
 function deleteUserStatus(urlUser) {
-  // url = " http://127.0.0.1:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
   fetch(urlUser, {
     method: "DELETE",
   })
@@ -389,10 +379,9 @@ function submitAttractionInfoBox(urlBooking) {
   if (date !== '' && time !== '') {
     // 這邊應該要用booking POST 的API因為這邊就預定行程了
     attractionUrl = window.location.href;
-    // attractionId = attractionUrl.substr(36);
-    attractionId = attractionUrl.substr(37);
+    attractionId = attractionUrl.substr(36);
     // testing purpose
-    // attractionId = attractionUrl.substr(33);
+    // attractionId = attractionUrl.substr(37);
 
     let price = time.substr(4)
     let timeOfDay
