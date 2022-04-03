@@ -1,13 +1,11 @@
 // 1. check the user log-in status.
 // 這個是為了當使用者直接type URL to booking page
 // 或是當使用者以登入 並再點選 預定行程按鈕準備前往booking page時 會在頁面再次做檢查
-// let urlBooking = "http://192.168.0.226:3000/api/booking";
-urlBooking = "http://52.63.14.114:3000/api/booking";
-function checkunconfirmOrder(urlBooking) {
-  // url = "http://192.168.0.226:3000/api/booking";
-  // url = "http://52.63.14.114:3000/api/booking";
+// let urlBookingInBookingJS = "http://192.168.0.226:3000/api/booking";
+let urlBookingInBookingJS = "http://52.63.14.114:3000/api/booking";
+function checkunconfirmOrder(urlBookingInBookingJS) {
 
-  fetch(urlBooking)
+  fetch(urlBookingInBookingJS)
     .then((response) => {
       if (response.status === 403) {
         return response.status;
@@ -128,14 +126,14 @@ function checkunconfirmOrder(urlBooking) {
       );
     });
 }
-checkunconfirmOrder(urlBooking)
+checkunconfirmOrder(urlBookingInBookingJS)
 
 
-function deleteBookedAttraction(urlBooking) {
+function deleteBookedAttraction(urlBookingInBookingJS) {
   // url = "http://127.0.0.1:3000//api/booking";
   // url = "http://52.63.14.114:3000/api/booking";
 
-  fetch(urlBooking, {
+  fetch(urlBookingInBookingJS, {
     method: "DELETE",
   })
     .then((response) => {
@@ -143,7 +141,7 @@ function deleteBookedAttraction(urlBooking) {
 
     }).then((data) => {
       // console.log(data)
-      checkunconfirmOrder(urlBooking)
+      checkunconfirmOrder(urlBookingInBookingJS)
     })
 }
 

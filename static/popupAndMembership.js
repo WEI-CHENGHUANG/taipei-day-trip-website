@@ -13,13 +13,13 @@ let clearPasswordBoxInputForSignIN =
 let clearPasswordBoxInputForRegister =
   document.getElementsByClassName("passwordBox")[1];
 
-// urlUser = "http://192.168.0.226:3000/api/user";
-urlUser = "http://52.63.14.114:3000/api/user";
-// urlBooking = "http://192.168.0.226:3000/api/booking";
-urlBooking = "http://52.63.14.114:3000/api/booking";
+// let urlUser = "http://192.168.0.226:3000/api/user";
+let urlUser = "http://52.63.14.114:3000/api/user";
+// let urlBooking = "http://192.168.0.226:3000/api/booking";
+let urlBooking = "http://52.63.14.114:3000/api/booking";
 // This is for checking whether current page's URL is the same as booking page URL and then I can get the contact name.
-// urlCurrentBooking = "http://192.168.0.226:3000/booking"
-urlCurrentBooking = "http://52.63.14.114:3000/booking"
+// let urlCurrentBooking = "http://192.168.0.226:3000/booking"
+let urlCurrentBooking = "http://52.63.14.114:3000/booking"
 
 // in index.html This function is the all the log-in function source, which means if I want to use log-in box, I can just use this.
 function btnPushItems_2() {
@@ -424,6 +424,7 @@ function submitAttractionInfoBox(urlBooking) {
           btnPushItems_2()
         } else {
           location.replace(urlCurrentBooking)
+          console.log("here")
         }
       })
       .catch((error) => {
@@ -436,23 +437,16 @@ function submitAttractionInfoBox(urlBooking) {
 }
 
 // For 預定行程button
-function bookingRecord(urlUser) {
-
-  // url = "http://127.0.0.1:3000//api/user";
-  // url = "http://52.63.14.114:3000/api/user";
-
+function bookingRecord(urlUser, urlCurrentBooking) {
   fetch(urlUser)
     .then((response) => {
       return response.json();
 
     }).then((data) => {
       if (String(data) === "null") {
-        // console.log("This is for 預定行程button")
         btnPushItems_2()
       } else {
-        // console.log("已經登入")
-        // location.replace("http://127.0.0.1:3000/booking")
-        location.replace("http://52.63.14.114:3000/booking")
+        location.replace(urlCurrentBooking)
       }
     }).catch((error) => {
       console.log(
