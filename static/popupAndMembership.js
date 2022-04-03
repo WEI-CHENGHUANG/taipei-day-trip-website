@@ -251,8 +251,8 @@ function registerToSystem() {
 }
 
 function checkUserStatus() {
-  url = " http://127.0.0.1:3000/api/user";
-  // url = "http://52.63.14.114:3000/api/user";
+  // url = " http://127.0.0.1:3000/api/user";
+  url = "http://52.63.14.114:3000/api/user";
   fetch(url)
     .then((response) => {
       return response.json();
@@ -419,8 +419,8 @@ function submitAttractionInfoBox() {
         if (data === 403) {
           btnPushItems_2()
         } else {
-          location.replace(" http://127.0.0.1:3000/booking")
-          // location.replace("http://52.63.14.114:3000/booking")
+          // location.replace(" http://127.0.0.1:3000/booking")
+          location.replace("http://52.63.14.114:3000/booking")
         }
       })
       .catch((error) => {
