@@ -384,9 +384,9 @@ function submitAttractionInfoBox() {
     // url = " http://127.0.0.1:3000/api/booking";
     url = "http://52.63.14.114:3000/api/booking";
     attractionUrl = window.location.href;
-    // attractionId = attractionUrl.substr(36);
+    attractionId = attractionUrl.substr(36);
     // testing purpose
-    attractionId = attractionUrl.substr(33);
+    // attractionId = attractionUrl.substr(33);
 
     let price = time.substr(4)
     let timeOfDay

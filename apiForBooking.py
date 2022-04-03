@@ -39,7 +39,6 @@ class bookingFunction(Resource):
             content_type = request.headers.get('Content-Type')
             if (content_type == 'application/json'):
                 json = request.get_json()
-                contactName = json["contactName"]
                 attractionId = json["attractionId"]
                 date = json["date"]
                 time = json["time"]
@@ -67,8 +66,8 @@ class bookingFunction(Resource):
                         response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry, queryExistBookingAttraction"}),500)
                         return response
                     elif queryExistBookingAttraction == []:
-                        insert ="INSERT INTO bookingInfo (contactName, attractionId, travelDate, travelTime, price, email) VALUES(%s, %s, %s, %s, %s, %s)"
-                        insertResult = insertNewMembers(insert, (contactName, attractionId, date, time, price, email))
+                        insert ="INSERT INTO bookingInfo (attractionId, travelDate, travelTime, price, email) VALUES(%s, %s, %s, %s, %s)"
+                        insertResult = insertNewMembers(insert, (attractionId, date, time, price, email))
                         if insertResult == "Wrong":
                             response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry, insertResult"}),500)
                             return response
@@ -82,8 +81,8 @@ class bookingFunction(Resource):
                             response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry, deleteOldRecord"}),500)
                             return response
                         else:
-                            insert ="INSERT INTO bookingInfo (contactName, attractionId, travelDate, travelTime, price, email) VALUES(%s, %s, %s, %s, %s, %s)"
-                            insertResult = insertNewMembers(insert, (contactName, attractionId, date, time, price, email))
+                            insert ="INSERT INTO bookingInfo (attractionId, travelDate, travelTime, price, email) VALUES(%s, %s, %s, %s, %s)"
+                            insertResult = insertNewMembers(insert, (attractionId, date, time, price, email))
                             if insertResult == "Wrong":
                                 response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry, insertResult here last step"}),500)
                                 return response
