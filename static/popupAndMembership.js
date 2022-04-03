@@ -13,6 +13,14 @@ let clearPasswordBoxInputForSignIN =
 let clearPasswordBoxInputForRegister =
   document.getElementsByClassName("passwordBox")[1];
 
+// urlUser = "http://192.168.0.226:3000/api/user";
+urlUser = "http://52.63.14.114:3000/api/user";
+// urlBooking = "http://192.168.0.226:3000/api/booking";
+urlBooking = "http://52.63.14.114:3000/api/booking";
+// This is for checking whether current page's URL is the same as booking page URL and then I can get the contact name.
+// urlCurrentBooking = "http://192.168.0.226:3000/booking"
+urlCurrentBooking = "http://52.63.14.114:3000/booking"
+
 // in index.html This function is the all the log-in function source, which means if I want to use log-in box, I can just use this.
 function btnPushItems_2() {
   signInPopup.style.display = "block";
@@ -116,7 +124,7 @@ function createNavLogInTag() {
   logOutButton.id = "pushItemsLogOut";
   logOutButton.className = "pushItemsLogOut";
   logOutButton.onclick = function () {
-    deleteUserStatus();
+    deleteUserStatus(urlUser);
   };
   let logOutTag = document.createElement("p");
   logOutTag.id = "logOut";
@@ -144,16 +152,16 @@ signInToSystem.addEventListener("click", (outcome) => {
     tagClassName = "errorMsg";
     createInformMsgTag("bottomPopupBoxForSingIn", tagClassName, messages);
   } else {
-    logInToSystem();
+    logInToSystem(urlUser);
   }
 });
 
-function logInToSystem() {
-  // url = " http://127.0.0.1:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
+function logInToSystem(urlUser) {
+  // url = "http://127.0.0.1:3000/api/user";
+  // url = "http://52.63.14.114:3000/api/user";
   singInInput = document.getElementById("sigInEmailBox").value;
   sigInPasswordBox = document.getElementById("sigInPasswordBox").value;
-  fetch(url, {
+  fetch(urlUser, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
@@ -211,16 +219,16 @@ registerNewMeber.addEventListener("click", (outcome) => {
     tagClassName = "errorMsg";
     createInformMsgTag("bottomPopupBoxForRegister", tagClassName, messages);
   } else {
-    registerToSystem();
+    registerToSystem(urlUser);
   }
 });
 // =============================
 
-function registerToSystem() {
+function registerToSystem(urlUser) {
   // url = " http://127.0.0.1:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
+  // url = "http://52.63.14.114:3000/api/user";
 
-  fetch(url, {
+  fetch(urlUser, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -250,10 +258,10 @@ function registerToSystem() {
     });
 }
 
-function checkUserStatus() {
+function checkUserStatus(urlUser, urlCurrentBooking) {
   // url = " http://127.0.0.1:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
-  fetch(url)
+  // url = "http://52.63.14.114:3000/api/user";
+  fetch(urlUser)
     .then((response) => {
       return response.json();
     })
@@ -266,8 +274,8 @@ function checkUserStatus() {
         // The code below is all showing in the booking page.
         currentPageUrl = window.location.href;
         // url = "http://127.0.0.1:3000/booking"
-        url = "http://52.63.14.114:3000/booking"
-        if (currentPageUrl === url) {
+        // url = "http://52.63.14.114:3000/booking"
+        if (currentPageUrl === urlCurrentBooking) {
           userName = data["data"]["name"]
           firstSubTitleBookingPage = document.getElementsByClassName("firstSubTitle")[0]
 
@@ -286,10 +294,10 @@ function checkUserStatus() {
     });
 }
 
-function deleteUserStatus(singInInput, sigInPasswordBox) {
+function deleteUserStatus(urlUser) {
   // url = " http://127.0.0.1:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
-  fetch(url, {
+  // url = "http://52.63.14.114:3000/api/user";
+  fetch(urlUser, {
     method: "DELETE",
   })
     .then((response) => {
@@ -333,10 +341,10 @@ function deleteUserStatus(singInInput, sigInPasswordBox) {
     });
 }
 
-checkUserStatus();
+checkUserStatus(urlUser, urlCurrentBooking);
 
 
-function submitAttractionInfoBox() {
+function submitAttractionInfoBox(urlBooking) {
   // Date
   let date = document.getElementById('travelDate').value;
   let time = ''
@@ -379,12 +387,10 @@ function submitAttractionInfoBox() {
     timeOptions.appendChild(timeOptionsContainerForErrorMsg).innerHTML = "請選擇期間"
   }
   if (date !== '' && time !== '') {
-
     // 這邊應該要用booking POST 的API因為這邊就預定行程了
-    // url = " http://127.0.0.1:3000/api/booking";
-    url = "http://52.63.14.114:3000/api/booking";
     attractionUrl = window.location.href;
-    attractionId = attractionUrl.substr(36);
+    // attractionId = attractionUrl.substr(36);
+    attractionId = attractionUrl.substr(37);
     // testing purpose
     // attractionId = attractionUrl.substr(33);
 
@@ -394,9 +400,8 @@ function submitAttractionInfoBox() {
       timeOfDay = "morning"
     } else { timeOfDay = "afternoon" }
 
-
-
-    fetch(url, {
+    // This fetch is only for update or insert new data to database.
+    fetch(urlBooking, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -418,8 +423,7 @@ function submitAttractionInfoBox() {
         if (data === 403) {
           btnPushItems_2()
         } else {
-          // location.replace(" http://127.0.0.1:3000/booking")
-          location.replace("http://52.63.14.114:3000/booking")
+          location.replace(urlCurrentBooking)
         }
       })
       .catch((error) => {
@@ -432,12 +436,12 @@ function submitAttractionInfoBox() {
 }
 
 // For 預定行程button
-function bookingRecord() {
+function bookingRecord(urlUser) {
 
   // url = "http://127.0.0.1:3000//api/user";
-  url = "http://52.63.14.114:3000/api/user";
+  // url = "http://52.63.14.114:3000/api/user";
 
-  fetch(url)
+  fetch(urlUser)
     .then((response) => {
       return response.json();
 

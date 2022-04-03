@@ -1,11 +1,13 @@
 // 1. check the user log-in status.
 // 這個是為了當使用者直接type URL to booking page
 // 或是當使用者以登入 並再點選 預定行程按鈕準備前往booking page時 會在頁面再次做檢查
-function checkunconfirmOrder() {
-  // url = "http://127.0.0.1:3000//api/booking";
-  url = "http://52.63.14.114:3000/api/booking";
+// let urlBooking = "http://192.168.0.226:3000/api/booking";
+urlBooking = "http://52.63.14.114:3000/api/booking";
+function checkunconfirmOrder(urlBooking) {
+  // url = "http://192.168.0.226:3000/api/booking";
+  // url = "http://52.63.14.114:3000/api/booking";
 
-  fetch(url)
+  fetch(urlBooking)
     .then((response) => {
       if (response.status === 403) {
         return response.status;
@@ -14,9 +16,8 @@ function checkunconfirmOrder() {
     })
     .then((data) => {
       if (data === 403) {
-        console.log("I am in step one")
+        // console.log("I am in step one")
         // 尚未登入
-
         // // get the exist tag first
         mainBodyFromBookingPage = document.getElementById("forInsertingPurpose")
         newFooter = document.getElementById("forNewFooter")
@@ -39,8 +40,8 @@ function checkunconfirmOrder() {
         newFooterForAskLoginInfo.style.display = "flex"
 
       } else if (data === null) {
-        console.log("I am in step two")
-        // // 以登入 沒有預定資訊
+        // console.log("I am in step two")
+        // // 已登入 沒有預定資訊
         wholeMainBodyFromBookingPage = document.getElementsByClassName("wholeMainBody")[0]
         wholeMainBodyFromBookingPage.style.display = "flex"
 
@@ -108,6 +109,11 @@ function checkunconfirmOrder() {
         bookingLocationTag.className = "two";
         bookingLocation.appendChild(bookingLocationTag)
         bookingLocationTag.innerHTML = data["data"]["attraction"]["address"]
+        // total amout of payment
+        totalAmountPayment = document.getElementsByClassName("totalAmountPayment")[0]
+        let totalAmountPaymentTag = document.createElement("label");
+        totalAmountPayment.appendChild(totalAmountPaymentTag)
+        totalAmountPaymentTag.innerHTML = "總價：新台幣" + dollarUSLocale.format(data["data"]["price"]) + "元"
 
         // The default of old Footer style is flex.
         // New Footer
@@ -122,22 +128,22 @@ function checkunconfirmOrder() {
       );
     });
 }
-checkunconfirmOrder()
+checkunconfirmOrder(urlBooking)
 
 
-function deleteBookedAttraction() {
+function deleteBookedAttraction(urlBooking) {
   // url = "http://127.0.0.1:3000//api/booking";
-  url = "http://52.63.14.114:3000/api/booking";
+  // url = "http://52.63.14.114:3000/api/booking";
 
-  fetch(url, {
+  fetch(urlBooking, {
     method: "DELETE",
   })
     .then((response) => {
       return response.json();
 
     }).then((data) => {
-      console.log(data)
-      checkunconfirmOrder()
+      // console.log(data)
+      checkunconfirmOrder(urlBooking)
     })
 }
 

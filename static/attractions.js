@@ -56,8 +56,9 @@ function displayImg(n) {
 // This is to extract the ID from current URL page.
 attractionUrl = window.location.href;
 attractionId = attractionUrl.substr(36);
+
 // testing purpose
-// attractionId = attractionUrl.substr(33);
+// attractionId = attractionUrl.substr(37);
 
 url = `http://52.63.14.114:3000/api/attraction/${attractionId}`;
 function queryAttractionsById(url) {

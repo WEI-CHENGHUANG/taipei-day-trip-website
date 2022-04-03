@@ -289,7 +289,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   height: 100%;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 /* This is from bookingForFetchAPi.js around line 60. */
@@ -305,7 +305,7 @@ body {
   position: fixed;
   width: 100%;
   bottom: 0;
-  height: 70%;
+  top: 225px;
 }
 
 .newFooterForAskLoginInfo>div {
@@ -314,4 +314,75 @@ body {
   width: 234px;
   height: 14px;
   margin-top: 45px;
+}
+
+
+@media (max-width: 1200px) {
+  .firstSubTitle {
+    width: 90%;
+  }
+
+  .bookingWholeTopInfo {
+    /* background: brown; */
+    width: 95%;
+  }
+
+  .bookingWholeMidInfo,
+  .bookingWholeBottomInfo,
+  .submitButtonForPayment {
+    width: 95%;
+  }
+}
+
+
+
+
+@media (max-width: 650px) {
+  .firstSubTitle {
+    width: 90%;
+  }
+
+  .bookingWholeTopInfo {
+    /* background: brown; */
+    width: 95%;
+  }
+
+
+
+  .bookingWholeMidInfo,
+  .bookingWholeBottomInfo,
+  .submitButtonForPayment {
+    width: 95%;
+  }
+
+  .bookingWholeMidInfo {
+    padding-bottom: 38px;
+  }
+
+  .bookingWholeTopInfo {
+    /* background-color: antiquewhite; */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bookingTopinfo {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 405px;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .rubbishBin {
+    /* background-color: red; */
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+  }
+
+  .newWholeMainBody>p {
+    margin-left: 10px;
+  }
+
 }
