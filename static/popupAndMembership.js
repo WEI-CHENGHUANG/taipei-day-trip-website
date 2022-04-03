@@ -13,7 +13,7 @@ let clearPasswordBoxInputForSignIN =
 let clearPasswordBoxInputForRegister =
   document.getElementsByClassName("passwordBox")[1];
 
-// in index.html
+// in index.html This function is the all the log-in function source, which means if I want to use log-in box, I can just use this.
 function btnPushItems_2() {
   signInPopup.style.display = "block";
 }
@@ -149,11 +149,10 @@ signInToSystem.addEventListener("click", (outcome) => {
 });
 
 function logInToSystem() {
-  // url = "http://192.168.0.223:3000/api/user";
+  // url = " http://127.0.0.1:3000/api/user";
   url = "http://52.63.14.114:3000/api/user";
   singInInput = document.getElementById("sigInEmailBox").value;
   sigInPasswordBox = document.getElementById("sigInPasswordBox").value;
-
   fetch(url, {
     method: "PATCH",
     headers: {
@@ -185,7 +184,7 @@ function logInToSystem() {
     .catch((error) => {
       console.log(
         error,
-        "Something went wrong when fetching data via API, Check JS function : give the function name here"
+        "Something went wrong when fetching data via API, Check JS function : logInToSystem"
       );
     });
 }
@@ -216,8 +215,9 @@ registerNewMeber.addEventListener("click", (outcome) => {
   }
 });
 // =============================
+
 function registerToSystem() {
-  // url = "http://192.168.0.223:3000/api/user";
+  // url = " http://127.0.0.1:3000/api/user";
   url = "http://52.63.14.114:3000/api/user";
 
   fetch(url, {
@@ -237,7 +237,7 @@ function registerToSystem() {
     })
     .then((data) => {
       if (String(Object.keys(data)) === "ok") {
-        console.log("成功");
+        // console.log("成功");
         messages = ["註冊成功"];
         tagClassName = "successMsg";
         createInformMsgTag("bottomPopupBoxForRegister", tagClassName, messages);
@@ -245,33 +245,49 @@ function registerToSystem() {
         messages = [data["message"]];
         tagClassName = "errorMsg";
         createInformMsgTag("bottomPopupBoxForRegister", tagClassName, messages);
-        console.log(data["message"]);
+        // console.log(data["message"]);
       }
     });
 }
 
 function checkUserStatus() {
-  // url = "http://192.168.0.223:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
+  url = " http://127.0.0.1:3000/api/user";
+  // url = "http://52.63.14.114:3000/api/user";
   fetch(url)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      // The code below means the user already logged in system.
       if (String(data) !== "null") {
         createNavLogInTag();
+        // In order to get the user name by this fetching API,so here, 
+        // I need to check which page are sending this API then response the user name to page.
+        // The code below is all showing in the booking page.
+        currentPageUrl = window.location.href;
+        // url = "http://127.0.0.1:3000/booking"
+        url = "http://52.63.14.114:3000/booking"
+        if (currentPageUrl === url) {
+          userName = data["data"]["name"]
+          firstSubTitleBookingPage = document.getElementsByClassName("firstSubTitle")[0]
+
+          let firstSubTitleBookingPageTag = document.createElement("p");
+          firstSubTitleBookingPage.appendChild(firstSubTitleBookingPageTag)
+          firstSubTitleBookingPageTag.innerHTML = `您好，${userName}，待預定的行程如下:`
+        }
       }
+
     })
     .catch((error) => {
       console.log(
         error,
-        "Something went wrong when fetching data via API, Check JS function : give the function name here"
+        "Something went wrong when fetching data via API, Check JS function : checkUserStatus()"
       );
     });
 }
 
 function deleteUserStatus(singInInput, sigInPasswordBox) {
-  // url = "http://192.168.0.223:3000/api/user";
+  // url = " http://127.0.0.1:3000/api/user";
   url = "http://52.63.14.114:3000/api/user";
   fetch(url, {
     method: "DELETE",
@@ -312,9 +328,135 @@ function deleteUserStatus(singInInput, sigInPasswordBox) {
     .catch((error) => {
       console.log(
         error,
-        "Something went wrong when fetching data via API, Check JS function : give the function name here"
+        "Something went wrong when fetching data via API, Check JS function : deleteUserStatus()"
       );
     });
 }
 
 checkUserStatus();
+
+
+function submitAttractionInfoBox() {
+  // Date
+  let date = document.getElementById('travelDate').value;
+  let time = ''
+  if (date === '') {
+    dateOptionsForErrorMsgTag = document.getElementsByClassName("dateOptionsForErrorMsg")[0]
+    if (dateOptionsForErrorMsgTag) {
+      dateOptionsForErrorMsgTag.remove();
+    }
+    let dateOptions = document.getElementsByClassName("dateOptions")[0];
+    let dateOptionsForErrorMsg = document.createElement("label");
+    dateOptionsForErrorMsg.className = "dateOptionsForErrorMsg";
+    dateOptions.appendChild(dateOptionsForErrorMsg).innerHTML = "日期不得為空"
+  } else {
+    dateOptionsForErrorMsgTag = document.getElementsByClassName("dateOptionsForErrorMsg")[0]
+    if (dateOptionsForErrorMsgTag) {
+      dateOptionsForErrorMsgTag.remove();
+    }
+  }
+  // Time
+  if (document.getElementById('morning').checked) {
+    time = document.getElementById('morning').value;
+    timeOptionsForErrorMsgTag = document.getElementsByClassName("timeOptionsContainerForErrorMsg")[0]
+    if (timeOptionsForErrorMsgTag) {
+      timeOptionsForErrorMsgTag.remove();
+    }
+  } else if (document.getElementById('afternoon').checked) {
+    time = document.getElementById('afternoon').value;
+    timeOptionsForErrorMsgTag = document.getElementsByClassName("timeOptionsContainerForErrorMsg")[0]
+    if (timeOptionsForErrorMsgTag) {
+      timeOptionsForErrorMsgTag.remove();
+    }
+  } else {
+    timeOptionsForErrorMsgTag = document.getElementsByClassName("timeOptionsContainerForErrorMsg")[0]
+    if (timeOptionsForErrorMsgTag) {
+      timeOptionsForErrorMsgTag.remove();
+    }
+    let timeOptions = document.getElementsByClassName("timeOptions")[0];
+    let timeOptionsContainerForErrorMsg = document.createElement("label");
+    timeOptionsContainerForErrorMsg.className = "timeOptionsContainerForErrorMsg";
+    timeOptions.appendChild(timeOptionsContainerForErrorMsg).innerHTML = "請選擇期間"
+  }
+  if (date !== '' && time !== '') {
+
+    // 這邊應該要用booking POST 的API因為這邊就預定行程了
+    // url = " http://127.0.0.1:3000/api/booking";
+    url = "http://52.63.14.114:3000/api/user";
+    attractionUrl = window.location.href;
+    // attractionId = attractionUrl.substr(36);
+    // testing purpose
+    attractionId = attractionUrl.substr(33);
+
+    let price = time.substr(4)
+    let timeOfDay
+    if (price === "2000") {
+      timeOfDay = "morning"
+    } else { timeOfDay = "afternoon" }
+
+
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        contactName: 123,
+        attractionId: attractionId,
+        date: date,
+        time: timeOfDay,
+        price: price,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 403) {
+          return response.status;
+        } else { return response.json(); }
+      })
+      .then((data) => {
+        if (data === 403) {
+          btnPushItems_2()
+        } else {
+          location.replace(" http://127.0.0.1:3000/booking")
+          // location.replace("http://52.63.14.114:3000/booking")
+        }
+      })
+      .catch((error) => {
+        console.log(
+          error,
+          "Something went wrong when fetching data via API, Check JS function : checkUserStatus()"
+        );
+      });
+  }
+}
+
+// For 預定行程button
+function bookingRecord() {
+
+  // url = "http://127.0.0.1:3000//api/user";
+  url = "http://52.63.14.114:3000/api/user";
+
+  fetch(url)
+    .then((response) => {
+      return response.json();
+
+    }).then((data) => {
+      if (String(data) === "null") {
+        // console.log("This is for 預定行程button")
+        btnPushItems_2()
+      } else {
+        // console.log("已經登入")
+        // location.replace("http://127.0.0.1:3000/booking")
+        location.replace("http://52.63.14.114:3000/booking")
+      }
+    }).catch((error) => {
+      console.log(
+        error,
+        "Something went wrong when fetching data via API, Check JS function : bookingRecord()"
+      );
+    });
+
+}
+

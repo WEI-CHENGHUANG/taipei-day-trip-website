@@ -4,7 +4,7 @@
   </div>
   <div class="registionBox">
     <div class="push">
-      <button class="pushItems_1">預定行程</button>
+      <button class="pushItems_1" onclick=" bookingRecord()">預定行程</button>
       <button id="pushItems_2" class="pushItems_2" onclick="btnPushItems_2()">
         <p id="logInAndRegister">登入/註冊</p>
         <!-- <p id="logOut">登出系統</p> -->
@@ -27,6 +27,7 @@
     width: 100%;
     border-bottom: 1px solid rgb(230, 230, 230);
   }
+
   .contentNav {
     /* background-color:red; */
     display: flex;
@@ -47,7 +48,8 @@
     list-style: none;
     margin: 0;
   }
-  .logoBox > a {
+
+  .logoBox>a {
     font-size: 30px;
     font-weight: bold;
     color: #448899;
@@ -69,12 +71,15 @@
     justify-content: center;
     align-items: center;
     background: #ffffff;
+    cursor: pointer;
   }
+
   .pushItems_1:hover {
     background-color: rgb(235, 232, 232);
     height: 45px;
     border-radius: 50%;
   }
+
   .pushItems_2,
   .pushItemsLogOut {
     border: none;
@@ -89,17 +94,21 @@
     justify-content: center;
     align-items: center;
     background: #ffffff;
+    cursor: pointer;
   }
+
   .pushItems_2:hover {
     background-color: rgb(235, 232, 232);
     height: 45px;
     border-radius: 50%;
   }
+
   .pushItemsLogOut:hover {
     background-color: rgb(235, 232, 232);
     height: 45px;
     border-radius: 50%;
   }
+
   @media (max-width: 1200px) {
     /* Nav bar */
 
@@ -107,10 +116,12 @@
       width: 90%;
     }
   }
+
   @media (max-width: 600px) {
     .contentNav {
       width: 100%;
     }
+
     .pushItems_1 {
       font-size: 13.5px;
       justify-content: none;

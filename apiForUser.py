@@ -1,8 +1,6 @@
-from ast import Delete
 from databaseFunctions.database import queryOneClause,insertNewMembers, queryMultileClauses
 from flask_restful import Resource
 from flask import *
-import json
 from flask_jwt_extended import create_access_token, set_access_cookies, unset_jwt_cookies
 import datetime
 import jwt
@@ -92,33 +90,7 @@ class userIdentification(Resource):
             except:
                 response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry"}),500)
                 return response
-    
-        # if (content_type == 'application/json'):
-        #     json = request.get_json()
-        #     email = json["email"]
-        #     password = json["password"]
-        #     query ="SELECT id, name, email FROM member WHERE email=%s and password=%s;"
-        #     try:
-        #         queryResult = queryMultileClauses(query, (email, password))
-        #         if queryResult:
-        #             expires = datetime.timedelta(days=7)
-        #             accessToken = create_access_token(identity={"data":{"id":queryResult[0][0],"name":queryResult[0][1],"email":queryResult[0][2]}}, expires_delta=expires)
-        #             # # This is for session method, write it in the notion.
-        #             # session["email"] = queryResult[0][0]
-        #             # session["password"] = queryResult[0][1]
-
-        #             response = make_response(jsonify({"ok": True}), 200)
-        #             set_access_cookies(response, accessToken)
-
-        #             return response
-        #         else:
-        #             response = make_response(jsonify({"error": True, "message": f'Sorry, the user name or password might be wrong, Please try it again, thanks.'}), 400)
-        #             return response
-        #     except:
-        #         response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry"}),500)
-        #         return response
-            
-            
+                 
     def delete(self):
         # Delete JWT token
         try:
