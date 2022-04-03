@@ -382,7 +382,7 @@ function submitAttractionInfoBox() {
 
     // 這邊應該要用booking POST 的API因為這邊就預定行程了
     // url = " http://127.0.0.1:3000/api/booking";
-    url = "http://52.63.14.114:3000/api/user";
+    url = "http://52.63.14.114:3000/api/booking";
     attractionUrl = window.location.href;
     // attractionId = attractionUrl.substr(36);
     // testing purpose
@@ -403,7 +403,6 @@ function submitAttractionInfoBox() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        contactName: 123,
         attractionId: attractionId,
         date: date,
         time: timeOfDay,
@@ -426,7 +425,7 @@ function submitAttractionInfoBox() {
       .catch((error) => {
         console.log(
           error,
-          "Something went wrong when fetching data via API, Check JS function : checkUserStatus()"
+          "Something went wrong when fetching data via API, Check JS function : submitAttractionInfoBox()"
         );
       });
   }
