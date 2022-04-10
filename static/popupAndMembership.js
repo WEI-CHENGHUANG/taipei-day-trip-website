@@ -386,9 +386,9 @@ function submitAttractionInfoBox(urlBooking) {
   if (date !== '' && time !== '') {
     // 這邊應該要用booking POST 的API因為這邊就預定行程了
     attractionUrl = window.location.href;
-    // attractionId = attractionUrl.substr(36);
+    attractionId = attractionUrl.substr(36);
     // testing purpose
-    attractionId = attractionUrl.substr(37);
+    // attractionId = attractionUrl.substr(37);
 
     let price = time.substring(4)
     let timeOfDay
