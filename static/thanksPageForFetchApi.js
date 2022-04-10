@@ -1,8 +1,7 @@
 orderUrl = window.location.href;
 // orderNumber = orderUrl.substr(42);
 // 正式
-orderNumber = attractionUrl.substr(41);
-
+orderNumber = orderUrl.substr(41);
 // let newURLForThankyou = `http://192.168.0.226:3000/api/order/${orderNumber}`
 let newURLForThankyou = `http://52.63.14.114:3000/api/order/${orderNumber}`
 function getorderInfo(newURLForThankyou) {
@@ -68,10 +67,10 @@ function getorderInfo(newURLForThankyou) {
 }
 
 function returnToHP() {
-    location.replace("http://192.168.0.226:3000/")
+    location.replace("http://52.63.14.114:3000/")
 }
 function returnTobookingPage() {
-    location.replace("http://192.168.0.226:3000/booking")
+    location.replace("http://52.63.14.114:3000/booking")
 }
 
 getorderInfo(newURLForThankyou)
