@@ -13,7 +13,15 @@ let clearPasswordBoxInputForSignIN =
 let clearPasswordBoxInputForRegister =
   document.getElementsByClassName("passwordBox")[1];
 
-// in index.html
+// let urlUser = "http://192.168.0.226:3000/api/user";
+let urlUser = "http://52.63.14.114:3000/api/user";
+// let urlBooking = "http://192.168.0.226:3000/api/booking";
+let urlBooking = "http://52.63.14.114:3000/api/booking";
+// This is for checking whether current page's URL is the same as booking page URL and then I can get the contact name.
+// let urlCurrentBooking = "http://192.168.0.226:3000/booking"
+let urlCurrentBooking = "http://52.63.14.114:3000/booking"
+
+// in index.html This function is the all the log-in function source, which means if I want to use log-in box, I can just use this.
 function btnPushItems_2() {
   signInPopup.style.display = "block";
 }
@@ -116,7 +124,7 @@ function createNavLogInTag() {
   logOutButton.id = "pushItemsLogOut";
   logOutButton.className = "pushItemsLogOut";
   logOutButton.onclick = function () {
-    deleteUserStatus();
+    deleteUserStatus(urlUser);
   };
   let logOutTag = document.createElement("p");
   logOutTag.id = "logOut";
@@ -144,17 +152,14 @@ signInToSystem.addEventListener("click", (outcome) => {
     tagClassName = "errorMsg";
     createInformMsgTag("bottomPopupBoxForSingIn", tagClassName, messages);
   } else {
-    logInToSystem();
+    logInToSystem(urlUser);
   }
 });
 
-function logInToSystem() {
-  // url = "http://192.168.0.223:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
+function logInToSystem(urlUser) {
   singInInput = document.getElementById("sigInEmailBox").value;
   sigInPasswordBox = document.getElementById("sigInPasswordBox").value;
-
-  fetch(url, {
+  fetch(urlUser, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
@@ -185,7 +190,7 @@ function logInToSystem() {
     .catch((error) => {
       console.log(
         error,
-        "Something went wrong when fetching data via API, Check JS function : give the function name here"
+        "Something went wrong when fetching data via API, Check JS function : logInToSystem"
       );
     });
 }
@@ -212,15 +217,13 @@ registerNewMeber.addEventListener("click", (outcome) => {
     tagClassName = "errorMsg";
     createInformMsgTag("bottomPopupBoxForRegister", tagClassName, messages);
   } else {
-    registerToSystem();
+    registerToSystem(urlUser);
   }
 });
 // =============================
-function registerToSystem() {
-  // url = "http://192.168.0.223:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
 
-  fetch(url, {
+function registerToSystem(urlUser) {
+  fetch(urlUser, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -237,7 +240,7 @@ function registerToSystem() {
     })
     .then((data) => {
       if (String(Object.keys(data)) === "ok") {
-        console.log("成功");
+        // console.log("成功");
         messages = ["註冊成功"];
         tagClassName = "successMsg";
         createInformMsgTag("bottomPopupBoxForRegister", tagClassName, messages);
@@ -245,35 +248,46 @@ function registerToSystem() {
         messages = [data["message"]];
         tagClassName = "errorMsg";
         createInformMsgTag("bottomPopupBoxForRegister", tagClassName, messages);
-        console.log(data["message"]);
+        // console.log(data["message"]);
       }
     });
 }
 
-function checkUserStatus() {
-  // url = "http://192.168.0.223:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
-  fetch(url)
+function checkUserStatus(urlUser, urlCurrentBooking) {
+
+  fetch(urlUser)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      // The code below means the user already logged in system.
       if (String(data) !== "null") {
         createNavLogInTag();
+        // In order to get the user name by this fetching API,so here, 
+        // I need to check which page are sending this API then response the user name to page.
+        // The code below is all showing in the booking page.
+        currentPageUrl = window.location.href;
+        if (currentPageUrl === urlCurrentBooking) {
+          userName = data["data"]["name"]
+          firstSubTitleBookingPage = document.getElementsByClassName("firstSubTitle")[0]
+
+          let firstSubTitleBookingPageTag = document.createElement("p");
+          firstSubTitleBookingPage.appendChild(firstSubTitleBookingPageTag)
+          firstSubTitleBookingPageTag.innerHTML = `您好，${userName}，待預定的行程如下:`
+        }
       }
+
     })
     .catch((error) => {
       console.log(
         error,
-        "Something went wrong when fetching data via API, Check JS function : give the function name here"
+        "Something went wrong when fetching data via API, Check JS function : checkUserStatus()"
       );
     });
 }
 
-function deleteUserStatus(singInInput, sigInPasswordBox) {
-  // url = "http://192.168.0.223:3000/api/user";
-  url = "http://52.63.14.114:3000/api/user";
-  fetch(url, {
+function deleteUserStatus(urlUser) {
+  fetch(urlUser, {
     method: "DELETE",
   })
     .then((response) => {
@@ -312,9 +326,123 @@ function deleteUserStatus(singInInput, sigInPasswordBox) {
     .catch((error) => {
       console.log(
         error,
-        "Something went wrong when fetching data via API, Check JS function : give the function name here"
+        "Something went wrong when fetching data via API, Check JS function : deleteUserStatus()"
       );
     });
 }
 
-checkUserStatus();
+checkUserStatus(urlUser, urlCurrentBooking);
+
+
+function submitAttractionInfoBox(urlBooking) {
+  // Date
+  let date = document.getElementById('travelDate').value;
+  let time = ''
+  if (date === '') {
+    dateOptionsForErrorMsgTag = document.getElementsByClassName("dateOptionsForErrorMsg")[0]
+    if (dateOptionsForErrorMsgTag) {
+      dateOptionsForErrorMsgTag.remove();
+    }
+    let dateOptions = document.getElementsByClassName("dateOptions")[0];
+    let dateOptionsForErrorMsg = document.createElement("label");
+    dateOptionsForErrorMsg.className = "dateOptionsForErrorMsg";
+    dateOptions.appendChild(dateOptionsForErrorMsg).innerHTML = "日期不得為空"
+  } else {
+    dateOptionsForErrorMsgTag = document.getElementsByClassName("dateOptionsForErrorMsg")[0]
+    if (dateOptionsForErrorMsgTag) {
+      dateOptionsForErrorMsgTag.remove();
+    }
+  }
+  // Time
+  if (document.getElementById('morning').checked) {
+    time = document.getElementById('morning').value;
+    timeOptionsForErrorMsgTag = document.getElementsByClassName("timeOptionsContainerForErrorMsg")[0]
+    if (timeOptionsForErrorMsgTag) {
+      timeOptionsForErrorMsgTag.remove();
+    }
+  } else if (document.getElementById('afternoon').checked) {
+    time = document.getElementById('afternoon').value;
+    timeOptionsForErrorMsgTag = document.getElementsByClassName("timeOptionsContainerForErrorMsg")[0]
+    if (timeOptionsForErrorMsgTag) {
+      timeOptionsForErrorMsgTag.remove();
+    }
+  } else {
+    timeOptionsForErrorMsgTag = document.getElementsByClassName("timeOptionsContainerForErrorMsg")[0]
+    if (timeOptionsForErrorMsgTag) {
+      timeOptionsForErrorMsgTag.remove();
+    }
+    let timeOptions = document.getElementsByClassName("timeOptions")[0];
+    let timeOptionsContainerForErrorMsg = document.createElement("label");
+    timeOptionsContainerForErrorMsg.className = "timeOptionsContainerForErrorMsg";
+    timeOptions.appendChild(timeOptionsContainerForErrorMsg).innerHTML = "請選擇期間"
+  }
+  if (date !== '' && time !== '') {
+    // 這邊應該要用booking POST 的API因為這邊就預定行程了
+    attractionUrl = window.location.href;
+    attractionId = attractionUrl.substr(36);
+    // testing purpose
+    // attractionId = attractionUrl.substr(37);
+
+    let price = time.substr(4)
+    let timeOfDay
+    if (price === "2000") {
+      timeOfDay = "morning"
+    } else { timeOfDay = "afternoon" }
+
+    // This fetch is only for update or insert new data to database.
+    fetch(urlBooking, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        attractionId: attractionId,
+        date: date,
+        time: timeOfDay,
+        price: price,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 403) {
+          return response.status;
+        } else { return response.json(); }
+      })
+      .then((data) => {
+        if (data === 403) {
+          btnPushItems_2()
+        } else {
+          location.replace(urlCurrentBooking)
+          console.log("here")
+        }
+      })
+      .catch((error) => {
+        console.log(
+          error,
+          "Something went wrong when fetching data via API, Check JS function : submitAttractionInfoBox()"
+        );
+      });
+  }
+}
+
+// For 預定行程button
+function bookingRecord(urlUser, urlCurrentBooking) {
+  fetch(urlUser)
+    .then((response) => {
+      return response.json();
+
+    }).then((data) => {
+      if (String(data) === "null") {
+        btnPushItems_2()
+      } else {
+        location.replace(urlCurrentBooking)
+      }
+    }).catch((error) => {
+      console.log(
+        error,
+        "Something went wrong when fetching data via API, Check JS function : bookingRecord()"
+      );
+    });
+
+}
+

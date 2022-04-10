@@ -21,6 +21,7 @@ body {
   padding-bottom: 37px;
   border-bottom: 1px solid #e8e8e8;
 }
+
 /* Picture animation ==============*/
 .attractionPic {
   /* border: 2px solid blanchedalmond;
@@ -33,13 +34,13 @@ body {
   position: relative;
 }
 
-.attractionPic > .slideImage {
+.attractionPic>.slideImage {
   width: 100%;
   height: 100%;
   display: none;
 }
 
-.attractionPic > .slideImage > img {
+.attractionPic>.slideImage>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -47,7 +48,7 @@ body {
   overflow: hidden;
 }
 
-.attractionPic > .button {
+.attractionPic>.button {
   position: absolute;
   top: 50%;
   left: 0;
@@ -56,14 +57,16 @@ body {
   justify-content: space-between;
   z-index: 5;
 }
-.button > .prev {
+
+.button>.prev {
   margin-left: 10px;
 }
-.button > .next {
+
+.button>.next {
   margin-right: 10px;
 }
 
-.button > a {
+.button>a {
   height: 36px;
   width: 36px;
   text-align: center;
@@ -77,10 +80,12 @@ body {
   border-radius: 50%;
   user-select: none;
 }
+
 .OuterDotsContainer {
   display: flex;
   justify-content: center;
 }
+
 .dotsContainer {
   /* background-color: #666666; */
   position: absolute;
@@ -104,6 +109,7 @@ body {
   transition: 400ms;
   margin: 2px 4px;
 }
+
 .active,
 .dot:hover {
   content: "";
@@ -119,7 +125,7 @@ body {
   height: 406px;
 }
 
-.attractionInfo > h2 {
+.attractionInfo>h2 {
   height: 33px;
   font-size: 24px;
   font-weight: 700;
@@ -128,7 +134,7 @@ body {
   margin-top: 3px;
 }
 
-.attractionInfo > p {
+.attractionInfo>p {
   height: 22px;
   font-size: 16px;
   font-weight: 400;
@@ -137,7 +143,7 @@ body {
   margin-top: 15px;
 }
 
-.attractionInfo > .bookingDetails {
+.attractionInfo>.bookingDetails {
   margin-top: 20px;
   width: 600px;
   background-color: #e8e8e8;
@@ -148,34 +154,38 @@ body {
   padding-left: 20px;
   padding-bottom: 51px;
 }
-.bookingDetails > .bookingDetailsTitle {
+
+.bookingDetails>.bookingDetailsTitle {
   font-weight: 700;
   font-size: 16px;
   line-height: 13px;
 }
-.bookingDetails > .bookingDetailsDescription {
+
+.bookingDetails>.bookingDetailsDescription {
   font-weight: 400;
   font-size: 16px;
   line-height: 13px;
 }
-.bookingDetails > .dateOptions {
+
+.bookingDetails>.dateOptions {
   font-weight: 700;
   font-size: 16px;
   line-height: 13px;
 }
-.bookingDetails > .dateOptions > input {
+
+.bookingDetails>.dateOptions>input {
   width: 193px;
   height: 35px;
 }
 
-.bookingDetails > .timeOptions {
+.bookingDetails>.timeOptions {
   font-weight: 700;
   font-size: 16px;
   line-height: 13px;
 }
 
 /*= =============== Custom Radio button ==========================*/
-.bookingDetails > .timeOptions > .timeOptionsContainer {
+.bookingDetails>.timeOptions>.timeOptionsContainer {
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
@@ -187,14 +197,23 @@ body {
   user-select: none;
 }
 
-.bookingDetails > .timeOptions > .timeOptionsContainer > input {
+.bookingDetails>.timeOptions>.timeOptionsContainer>input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
+.bookingDetails>.timeOptions>.timeOptionsContainerForErrorMsg,
+.dateOptionsForErrorMsg {
+  margin-left: 15px;
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
 /* Create a custom radio button */
-.bookingDetails > .timeOptions > .timeOptionsContainer > .checkmark {
+.bookingDetails>.timeOptions>.timeOptionsContainer>.checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -205,13 +224,10 @@ body {
 }
 
 /* When the radio button is checked, add a blue background */
-.bookingDetails
-  > .timeOptions
-  > .timeOptionsContainer
-  > input:checked
-  ~ .checkmark {
+.bookingDetails>.timeOptions>.timeOptionsContainer>input:checked~.checkmark {
   background-color: white;
 }
+
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
   content: "";
@@ -220,16 +236,12 @@ body {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.bookingDetails
-  > .timeOptions
-  > .timeOptionsContainer
-  > input:checked
-  ~ .checkmark:after {
+.bookingDetails>.timeOptions>.timeOptionsContainer>input:checked~.checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.bookingDetails > .timeOptions > .timeOptionsContainer > .checkmark:after {
+.bookingDetails>.timeOptions>.timeOptionsContainer>.checkmark:after {
   top: 2.6px;
   left: 3px;
   width: 19px;
@@ -240,13 +252,13 @@ body {
 
 /* ================== ================ ===============*/
 
-.bookingDetails > .expenses {
+.bookingDetails>.expenses {
   font-weight: 700;
   font-size: 16px;
   line-height: 13px;
 }
 
-.bookingDetails > .bookingConfirmed > button {
+.bookingDetails>.bookingConfirmed>button {
   font-weight: 400;
   font-size: 19px;
   line-height: 16px;
@@ -258,7 +270,8 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
-.bookingDetails > .bookingConfirmed > button:active {
+
+.bookingDetails>.bookingConfirmed>button:active {
   background-color: #56aabe;
 }
 
@@ -270,19 +283,20 @@ body {
   justify-content: center;
   margin-bottom: 120px;
 }
+
 .bottomInfo {
   /* background-color: royalblue; */
   width: 1180px;
 }
 
-.bottomInfo > .firstP > p {
+.bottomInfo>.firstP>p {
   margin-top: 0;
   font-size: 400;
   font-size: 16px;
   color: #666666;
 }
 
-.bottomInfo > .attractionAddress > h2 {
+.bottomInfo>.attractionAddress>h2 {
   /* border: 2px solid red; */
   font-size: 16px;
   font-weight: 700;
@@ -290,7 +304,7 @@ body {
   margin: 0;
 }
 
-.bottomInfo > .attractionAddress > p {
+.bottomInfo>.attractionAddress>p {
   /* border: 2px solid burlywood; */
   font-size: 16px;
   font-weight: 400;
@@ -298,11 +312,11 @@ body {
   margin: 0;
 }
 
-.bottomInfo > .attractionTransportation {
+.bottomInfo>.attractionTransportation {
   margin-top: 20px;
 }
 
-.bottomInfo > .attractionTransportation > h2 {
+.bottomInfo>.attractionTransportation>h2 {
   /* border: 2px solid red; */
   font-size: 16px;
   font-weight: 700;
@@ -310,7 +324,7 @@ body {
   margin: 0;
 }
 
-.bottomInfo > .attractionTransportation > p {
+.bottomInfo>.attractionTransportation>p {
   /* border: 2px solid burlywood; */
   font-size: 16px;
   font-weight: 400;
@@ -322,48 +336,57 @@ body {
   .contentNav {
     width: 90%;
   }
+
   .wholeTopInfoBackground {
     width: 100%;
   }
+
   .topinfo {
     width: 100%;
   }
+
   .attractionPic {
     width: auto;
     margin-left: 30px;
   }
 
-  .attractionInfo > .bookingDetails {
+  .attractionInfo>.bookingDetails {
     width: 100%;
   }
+
   .attractionInfo {
     margin-right: 30px;
   }
-  .bookingDetails > .bookingDetailsDescription {
+
+  .bookingDetails>.bookingDetailsDescription {
     word-wrap: break-word;
     line-height: normal;
   }
 
-  .bookingDetails > .timeOptions > .timeOptionsContainer {
+  .bookingDetails>.timeOptions>.timeOptionsContainer {
     line-height: normal;
   }
-  .bottomInfo > .firstP > p {
+
+  .bottomInfo>.firstP>p {
     margin: 0 30px;
   }
 
-  .bottomInfo > .attractionAddress > h2 {
+  .bottomInfo>.attractionAddress>h2 {
     margin-top: 20px;
     margin: 0 30px;
   }
-  .bottomInfo > .attractionAddress > p {
+
+  .bottomInfo>.attractionAddress>p {
     margin-top: 0;
     margin: 0 30px;
   }
-  .bottomInfo > .attractionTransportation > h2 {
+
+  .bottomInfo>.attractionTransportation>h2 {
     margin-top: 20px;
     margin: 0 30px;
   }
-  .bottomInfo > .attractionTransportation > p {
+
+  .bottomInfo>.attractionTransportation>p {
     margin-top: 0;
     margin: 0 30px;
   }
@@ -373,6 +396,7 @@ body {
   .contentNav {
     width: 100%;
   }
+
   .pushItems_1 {
     font-size: 13.5px;
     justify-content: none;
@@ -381,42 +405,52 @@ body {
   .pushItems_2 {
     font-size: 13.5px;
   }
+
   .wholeTopInfoBackground {
     width: 100%;
     height: 950px;
   }
+
   .topinfo {
     flex-direction: column;
   }
+
   .attractionPic {
     margin-left: 0;
     margin-bottom: 20px;
   }
-  .attractionPic > .slideImage > img {
+
+  .attractionPic>.slideImage>img {
     border-radius: 0;
   }
+
   .attractionInfo {
     width: auto;
     margin: 10px;
   }
-  .attractionInfo > h2 {
+
+  .attractionInfo>h2 {
     width: 100%;
     margin: 0;
   }
-  .attractionInfo > p {
+
+  .attractionInfo>p {
     width: 100%;
     margin: 0;
     margin-top: 15px;
   }
-  .attractionInfo > .bookingDetails {
+
+  .attractionInfo>.bookingDetails {
     width: 96%;
     margin: 0;
     margin-top: 20px;
   }
-  .bookingDetails > .bookingDetailsDescription {
+
+  .bookingDetails>.bookingDetailsDescription {
     margin-right: 10px;
   }
-  .bookingDetails > .bookingConfirmed > button {
+
+  .bookingDetails>.bookingConfirmed>button {
     width: 160px;
   }
 }
