@@ -2,7 +2,7 @@
 // url = "http://192.168.0.226:3000/api/orders"
 // let urlBookingInBookingJS = "http://192.168.0.226:3000/api/booking";
 urlThankYou = "http://52.63.14.114:3000/thankyou?number="
-url = "http://52.63.14.114:3000/api/booking"
+url = "http://52.63.14.114:3000/api/orders"
 let urlBookingInBookingJS = "http://52.63.14.114:3000/api/booking";
 
 let fields = {

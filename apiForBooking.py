@@ -38,11 +38,11 @@ class bookingFunction(Resource):
             decoded = jwt.decode(request.cookies['access_token_cookie'],'taiwan', algorithms=['HS256'])
             content_type = request.headers.get('Content-Type')
             if (content_type == 'application/json'):
-                json = request.get_json()
-                attractionId = json["attractionId"]
-                date = json["date"]
-                time = json["time"]
-                price = json["price"]
+                responsejson = request.get_json()
+                attractionId = responsejson["attractionId"]
+                date = responsejson["date"]
+                time = responsejson["time"]
+                price = responsejson["price"]
                 email = decoded["sub"]["data"]["email"]
                 # Check if the attraction exists inside of the database.
                 query ="SELECT id FROM taipeiAttractions WHERE id=%s;"
