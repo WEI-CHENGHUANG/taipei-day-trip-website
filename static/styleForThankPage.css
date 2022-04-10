@@ -76,3 +76,7 @@ body {
   border: 2px solid grey;
   background-color: #64afc2;
 }
+
+.extraInfo {
+  margin-bottom: 150px;
+}
