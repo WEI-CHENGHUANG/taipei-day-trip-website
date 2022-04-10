@@ -19,7 +19,6 @@ def pickOneConnection():
             database = "website",
             user = "root",
             passwd = os.getenv("passwd")
-
         )
         connection = connection_pool.get_connection()
         return connection
@@ -143,4 +142,18 @@ def deleteOldrecord(deleterecord, *args):
         if oneConnection.in_transaction:
             oneConnection.rollback()
         oneConnection.close()
+
+def updateRecored(insert, *args):
+    try:
+        oneConnection = pickOneConnection()
+        cursor = oneConnection.cursor(buffered=True)
+        cursor.execute(insert, *args)
+        oneConnection.commit()
+        
+    except Error as e:
+        return "Wrong"
     
+    finally:
+        if oneConnection.in_transaction:
+            oneConnection.rollback()
+        oneConnection.close()

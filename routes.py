@@ -3,13 +3,14 @@
 from apiForAttractions import attractions, attractionId
 from apiForUser import userIdentification
 from apiForBooking import bookingFunction
+from apiForOrder import orderingFunction, orderNumber
 
 def initialize_routes(api):
     api.add_resource(attractions, '/api/attractions')
     api.add_resource(attractionId, '/api/attraction/<attractionId>')
     api.add_resource(userIdentification, '/api/user')
     api.add_resource(bookingFunction, '/api/booking')
-    
-    
+    api.add_resource(orderingFunction, '/api/orders')
+    api.add_resource(orderNumber, '/api/order/<orderNumber>')
 
 

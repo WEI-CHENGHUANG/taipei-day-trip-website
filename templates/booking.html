@@ -9,8 +9,8 @@
   <!-- 正式使用 -->
   <link href="{{url_for('static', filename='styleForBookingPage.css')}}" rel="stylesheet" type="text/css" />
   <!-- The line below is for font-family:'Noto Sans TC';  Reference:https://www.w3schools.com/howto/tryit.asp?font=Noto%20Sans%20TC-->
-  <link href="https://fonts.googleapis.com/css?family=Noto Sans TC" rel="stylesheet" />
-  <title>台北一日遊 Booking Page</title>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Noto Sans TC" rel="stylesheet" /> -->
+  <title>Taipei One Day Trip Booking</title>
 </head>
 
 <body>
@@ -67,17 +67,16 @@
             </div>
             <div class="bookingWholeMidInfoContactName">
               <label class="contacName">聯絡姓名 : </label>
-              <input class="box contactNameBox" placeholder="Wilson Huang" type="name" required />
+              <input class="box contactNameBox" placeholder="Wilson Huang" type="name" />
             </div>
             <div class="bookingWholeMidInfoeamil">
               <label class="bookingEmail">連絡信箱 : </label>
               <input class="box bookingEmailBox" placeholder="123@gmail.com"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
             </div>
             <div class="bookingWholeMidInfoMobile">
               <label class="mobile">手機號碼 : </label>
-              <input class="box mobileBox" placeholder="0412 345 678" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"
-                required />
+              <input class="box mobileBox" placeholder="0412 345 678" pattern="[0][0-9]{9}" type="tel" />
             </div>
             <div class="bookingWholeMidInfoNote">
               <label class="">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</label>
@@ -91,23 +90,27 @@
             </div>
             <div class="bookingWholeBottomInfoContactName">
               <label class="contacName">卡片號碼 : </label>
-              <input class="box contactNameBox" placeholder=" **** **** **** **** " type="tel" required />
+              <div class="tpfield" id="card-number"></div>
+              <!-- <input class="box contactNameBox" placeholder=" **** **** **** **** " type="tel" required /> -->
             </div>
             <div class="bookingWholeBottomInfoeamil">
               <label class="bookingEmail">過期時間 : </label>
-              <input class="box bookingEmailBox" placeholder=" MM / YY " pattern="([0-9]{2}[/]?){2}" required />
+              <div class="tpfield" id="card-expiration-date"></div>
+              <!-- <input class="box bookingEmailBox" placeholder=" MM / YY " pattern="([0-9]{2}[/]?){2}" required /> -->
             </div>
             <div class="bookingWholeBottomInfoMobile">
               <label class="mobile">驗證密碼 : </label>
-              <input id="" class="box mobileBox" placeholder=" CVV" pattern="[0-9]{3}" type="tel" required />
+              <div class="tpfield" id="card-ccv"></div>
+              <!-- <input id="" class="box mobileBox" placeholder=" CVV" pattern="[0-9]{3}" type="tel" required /> -->
             </div>
+
           </div>
         </div>
         <div class="submitButtonForPayment">
           <div class="totalAmountPayment">
             <!-- <label>總價：新台幣 2000 元 </label> -->
           </div>
-          <button id="totalAmountPaymentButton">
+          <button type="submit" class="btn btn-default" id="totalAmountPaymentButton" onclick="onSubmit(url)">
             <p>確認訂購並付款</p>
           </button>
         </div>
@@ -121,9 +124,12 @@
       </div>
     </div>
   </footer>
+  <script src="https://js.tappaysdk.com/tpdirect/v5.9.0"></script>
+  <script>TPDirect.setupSDK(124037, 'app_cc4vmfNpAsTyzrVNczTE8p7UmPVdEA9hbaR8E03CubrQBPLzL1SFbwc891hq', 'sandbox')</script>
   <script src="{{url_for('static', filename='popupAndMembership.js')}}"></script>
   <script src="{{url_for('static', filename='bookingForFetchApi.js')}}"></script>
   <!-- <script src="/static/bookingForFetchApi.js"></script> -->
+
 </body>
 
 </html>

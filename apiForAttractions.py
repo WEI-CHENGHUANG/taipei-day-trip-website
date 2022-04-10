@@ -38,7 +38,7 @@ def responseQueryResult(nextPage, data):
 class attractions(Resource):
     def get(self):
         # This page is from the JS url query string or from a post sent url query, then the rest of code can use this to do the extended work.
-        # indirect refterence: https://www.youtube.com/watch?v=yTbKm_6PsxY
+        # indirect refterence start from 3:28: https://www.youtube.com/watch?v=yTbKm_6PsxY
         # Page
         page = request.args.get('page')
         # This If is to check the only keyword input situation

@@ -13,13 +13,13 @@ let clearPasswordBoxInputForSignIN =
 let clearPasswordBoxInputForRegister =
   document.getElementsByClassName("passwordBox")[1];
 
-// let urlUser = "http://192.168.0.226:3000/api/user";
-let urlUser = "http://52.63.14.114:3000/api/user";
-// let urlBooking = "http://192.168.0.226:3000/api/booking";
-let urlBooking = "http://52.63.14.114:3000/api/booking";
+let urlUser = "http://192.168.0.226:3000/api/user";
+// let urlUser = "http://52.63.14.114:3000/api/user";
+let urlBooking = "http://192.168.0.226:3000/api/booking";
+// let urlBooking = "http://52.63.14.114:3000/api/booking";
 // This is for checking whether current page's URL is the same as booking page URL and then I can get the contact name.
-// let urlCurrentBooking = "http://192.168.0.226:3000/booking"
-let urlCurrentBooking = "http://52.63.14.114:3000/booking"
+let urlCurrentBooking = "http://192.168.0.226:3000/booking"
+// let urlCurrentBooking = "http://52.63.14.114:3000/booking"
 
 // in index.html This function is the all the log-in function source, which means if I want to use log-in box, I can just use this.
 function btnPushItems_2() {
@@ -88,6 +88,13 @@ function closeIconRegister() {
 
 function validateEmail(email) {
   if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function validatePhone(phoneNumber) {
+  if (/[0][0-9]{9}/.test(phoneNumber)) {
     return true;
   } else {
     return false;
@@ -379,11 +386,11 @@ function submitAttractionInfoBox(urlBooking) {
   if (date !== '' && time !== '') {
     // 這邊應該要用booking POST 的API因為這邊就預定行程了
     attractionUrl = window.location.href;
-    attractionId = attractionUrl.substr(36);
+    // attractionId = attractionUrl.substr(36);
     // testing purpose
-    // attractionId = attractionUrl.substr(37);
+    attractionId = attractionUrl.substr(37);
 
-    let price = time.substr(4)
+    let price = time.substring(4)
     let timeOfDay
     if (price === "2000") {
       timeOfDay = "morning"
@@ -413,7 +420,7 @@ function submitAttractionInfoBox(urlBooking) {
           btnPushItems_2()
         } else {
           location.replace(urlCurrentBooking)
-          console.log("here")
+          // console.log("here")
         }
       })
       .catch((error) => {
