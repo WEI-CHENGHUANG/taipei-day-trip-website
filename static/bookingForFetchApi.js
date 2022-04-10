@@ -2,7 +2,7 @@
 // url = "http://192.168.0.226:3000/api/orders"
 // let urlBookingInBookingJS = "http://192.168.0.226:3000/api/booking";
 urlThankYou = "http://52.63.14.114:3000/thankyou?number="
-url = "http://52.63.14.114:3000/api/orders"
+urlForBookingSumbit = "http://52.63.14.114:3000/api/orders"
 let urlBookingInBookingJS = "http://52.63.14.114:3000/api/booking";
 
 let fields = {
@@ -84,7 +84,7 @@ function removeErrorMsg(contactErrorMsg) {
 
 
 
-function onSubmit(url) {
+function onSubmit(urlForBookingSumbit) {
   // This is to check the contact info
   let responseMsg = [];
   checkContactNmae = document.getElementsByClassName("contactNameBox")[0].value;
@@ -162,7 +162,7 @@ function onSubmit(url) {
     let contactEmail = document.getElementsByClassName('bookingEmailBox')[0].value;
     let contactPhone = document.getElementsByClassName('mobileBox')[0].value;
 
-    fetch(url, {
+    fetch(urlForBookingSumbit, {
       method: "POST",
       headers: {
         Accept: "application/json",
