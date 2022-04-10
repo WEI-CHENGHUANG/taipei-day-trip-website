@@ -59,8 +59,7 @@ class orderingFunction(Resource):
                                 travelDate, travelTime, contactName, contactemail, contactPhone, orderNumber, memberEmail) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                         insertResult = insertNewMembers(insert, (attractionId, amount, attractionName, attractionAddress, attractionImg,\
                                                                 travelDate, travelTime, contactName, contactEmail, contactPhone, orderNumber, memberEmail))
-                        print(insertResult)
-                        print(attractionId, amount, attractionName, attractionAddress, attractionImg,travelDate, travelTime, contactName, contactEmail, contactPhone, orderNumber, memberEmail)
+                       
                         if insertResult == "Wrong":
                             response = make_response(jsonify({"error": True, "message": "Internal Server Error, we are working on it, sorry, insertResult line63"}),500)
                             return response
