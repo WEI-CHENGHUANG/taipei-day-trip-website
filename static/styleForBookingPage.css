@@ -171,6 +171,14 @@ body {
   margin-top: 22px;
 }
 
+.bookingWholeBottomInfoContactName,
+.bookingWholeBottomInfoeamil,
+.bookingWholeBottomInfoMobile {
+  display: flex;
+  align-items: center;
+}
+
+
 .contacName,
 .bookingEmail,
 .mobile {
@@ -316,6 +324,31 @@ body {
   margin-top: 45px;
 }
 
+.tpfield {
+  height: 30px;
+  width: 200px;
+  border: 1px solid rgb(221, 219, 219);
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.bookingWholeMidInfoeamil>.box:invalid,
+.bookingWholeMidInfoMobile>.box:invalid {
+  border: 2px solid red;
+  outline: none;
+}
+
+.contactPhoneErrorMsg,
+.contactEmailErrorMsg,
+.contactNameErrorMsg {
+  color: red;
+}
+
+.creditCardErrorMsgP {
+  color: red;
+  font-size: 20px;
+}
 
 @media (max-width: 1200px) {
   .firstSubTitle {

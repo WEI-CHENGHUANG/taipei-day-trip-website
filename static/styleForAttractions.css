@@ -205,10 +205,10 @@ body {
 
 .bookingDetails>.timeOptions>.timeOptionsContainerForErrorMsg,
 .dateOptionsForErrorMsg {
-  margin-left: 15px;
+  margin-left: 5px;
   color: red;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: bolder;
+  font-size: 12px;
 }
 
 

@@ -14,8 +14,8 @@ let clearPasswordBoxInputForRegister =
   document.getElementsByClassName("passwordBox")[1];
 
 // let urlUser = "http://192.168.0.226:3000/api/user";
-let urlUser = "http://52.63.14.114:3000/api/user";
 // let urlBooking = "http://192.168.0.226:3000/api/booking";
+let urlUser = "http://52.63.14.114:3000/api/user";
 let urlBooking = "http://52.63.14.114:3000/api/booking";
 // This is for checking whether current page's URL is the same as booking page URL and then I can get the contact name.
 // let urlCurrentBooking = "http://192.168.0.226:3000/booking"
@@ -88,6 +88,13 @@ function closeIconRegister() {
 
 function validateEmail(email) {
   if (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function validatePhone(phoneNumber) {
+  if (/[0][0-9]{9}/.test(phoneNumber)) {
     return true;
   } else {
     return false;
@@ -383,7 +390,7 @@ function submitAttractionInfoBox(urlBooking) {
     // testing purpose
     // attractionId = attractionUrl.substr(37);
 
-    let price = time.substr(4)
+    let price = time.substring(4)
     let timeOfDay
     if (price === "2000") {
       timeOfDay = "morning"
@@ -413,7 +420,7 @@ function submitAttractionInfoBox(urlBooking) {
           btnPushItems_2()
         } else {
           location.replace(urlCurrentBooking)
-          console.log("here")
+          // console.log("here")
         }
       })
       .catch((error) => {
